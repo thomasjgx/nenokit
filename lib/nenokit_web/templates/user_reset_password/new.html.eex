@@ -1,15 +1,10 @@
-<h1>Forgot your password?</h1>
-
-<%= form_for :user, Routes.user_reset_password_path(@conn, :create), fn f -> %>
-  <%= label f, :email %>
-  <%= text_input f, :email, required: true %>
-
-  <div>
-    <%= submit "Send instructions to reset password" %>
-  </div>
+<%= form_for :user, Routes.user_reset_password_path(@conn, :create), [class: "form-signin mt-5"], fn f -> %>
+  <img class="mb-4" src="/docs/4.5/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
+  <h1 class="h3 mb-3 font-weight-normal">Forgot your password?</h1>
+  <label for="inputEmail" class="sr-only">Email address</label>
+  <%= text_input f, :email, required: true, class: "form-control", placeholder: "Email address" %>
+  <%= submit "Send reset request", class: "btn btn-lg btn-primary btn-block mt-4" %>
+  <p class="mt-4 mb-3 text-muted">
+    &copy; 2020
+  </p>
 <% end %>
-
-<p>
-  <%= link "Register", to: Routes.user_registration_path(@conn, :new) %> |
-  <%= link "Login", to: Routes.user_session_path(@conn, :new) %>
-</p>

@@ -1,6 +1,8 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container">
-    <a class="navbar-brand" href="<%= Routes.page_path(@conn, :index) %>">Nenokit</a>
+    <a class="navbar-brand" href="<%= Routes.page_path(@conn, :index) %>">
+      <img src="<%= Routes.static_path(@conn, "/images/logo.png") %>" class="site-logo">
+    </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mainMenu" aria-controls="mainMenu" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -8,18 +10,23 @@
     <div class="collapse navbar-collapse">
       <ul class="navbar-nav mr-auto">
       </ul>
-      <form class="form-inline my-2 my-md-0">
+      <%= form_for @conn, Routes.page_path(@conn, :search), [class: "form-inline my-2 my-md-0"], fn f -> %>
+        <input class="form-control mr-3" type="text" placeholder="Search" aria-label="Search">
         <ul class="navbar-nav mr-auto">
           <%= if @current_user do %>
-            <li><%= @current_user.email %></li>
-            <li><%= link "Settings", to: Routes.user_settings_path(@conn, :edit) %></li>
-            <li><%= link "Logout", to: Routes.user_session_path(@conn, :delete), method: :delete %></li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><%= @current_user.email %></a>
+              <div class="dropdown-menu" aria-labelledby="dropdown01">
+                <%= link "Settings", to: Routes.user_settings_path(@conn, :edit), class: "dropdown-item" %>
+                <%= link "Logout", to: Routes.user_session_path(@conn, :delete), method: :delete, class: "dropdown-item" %>
+              </div>
+            </li>
           <% else %>
-            <li><%= link "Create an account", to: Routes.user_registration_path(@conn, :new), class: "btn btn-info mr-2" %></li>
-            <li><%= link "Login", to: Routes.user_session_path(@conn, :new), class: "btn btn-primary" %></li>
+            <li><%= link "Create an account", to: Routes.user_registration_path(@conn, :new), class: "btn btn-outline-primary mr-3" %></li>
+            <li><%= link "Login", to: Routes.user_session_path(@conn, :new), class: "btn btn-outline-success mr-3" %></li>
           <% end %>
         </ul>
-      </form>
+      <% end %>
     </div>
   </div>
 </nav>
@@ -31,10 +38,10 @@
           <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
+          <a class="nav-link" href="#">About us</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+          <a class="nav-link" href="#">Get in touch!</a>
         </li>
     </div>
   </div>

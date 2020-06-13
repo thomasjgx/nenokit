@@ -20,6 +20,7 @@ defmodule NenokitWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :index
+    post "/search", PageController, :search
   end
 
   # Other scopes may use custom stacks.
