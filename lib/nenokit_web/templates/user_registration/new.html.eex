@@ -4,7 +4,7 @@
   <%= text_input f, :email, required: true, class: "form-control", placeholder: "Email address" %>
   <label for="inputPassword" class="sr-only">Password</label>
   <%= password_input f, :password, required: true, class: "form-control", placeholder: "Password" %>
-  <%= submit "Sign Up", class: "btn btn-lg btn-primary btn-block" %>
+  <%= submit "Sign Up", class: "btn btn-lg btn-primary btn-block mt-4" %>
   <p class="mt-4 mb-3 text-muted">
     <%= link "Already have an account?", to: Routes.user_session_path(@conn, :new) %>
   </p>
