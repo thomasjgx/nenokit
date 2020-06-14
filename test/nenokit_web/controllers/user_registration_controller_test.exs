@@ -7,9 +7,7 @@ defmodule NenokitWeb.UserRegistrationControllerTest do
     test "renders registration page", %{conn: conn} do
       conn = get(conn, Routes.user_registration_path(conn, :new))
       response = html_response(conn, 200)
-      assert response =~ "<h1>Register</h1>"
-      assert response =~ "Login</a>"
-      assert response =~ "Register</a>"
+      assert response =~ "Register"
     end
 
     test "redirects if already logged in", %{conn: conn} do
@@ -25,7 +23,7 @@ defmodule NenokitWeb.UserRegistrationControllerTest do
 
       conn =
         post(conn, Routes.user_registration_path(conn, :create), %{
-          "user" => %{"email" => email, "password" => valid_user_password()}
+          "user" => %{"name" => "Sample User", "email" => email, "password" => valid_user_password()}
         })
 
       assert get_session(conn, :user_token)
@@ -34,7 +32,7 @@ defmodule NenokitWeb.UserRegistrationControllerTest do
       # Now do a logged in request and assert on the menu
       conn = get(conn, "/")
       response = html_response(conn, 200)
-      assert response =~ email
+      assert response =~ "Sample User"
       assert response =~ "Settings</a>"
       assert response =~ "Logout</a>"
     end
@@ -42,13 +40,13 @@ defmodule NenokitWeb.UserRegistrationControllerTest do
     test "render errors for invalid data", %{conn: conn} do
       conn =
         post(conn, Routes.user_registration_path(conn, :create), %{
-          "user" => %{"email" => "with spaces", "password" => "too short"}
+          "user" => %{"name" => "Sample User", "email" => "with spaces", "password" => "short"}
         })
 
       response = html_response(conn, 200)
-      assert response =~ "Create an account"
+      assert response =~ "Register"
       assert response =~ "must have the @ sign and no spaces"
-      assert response =~ "should be at least 12 character"
+      assert response =~ "should be at least 6 character"
     end
   end
 end

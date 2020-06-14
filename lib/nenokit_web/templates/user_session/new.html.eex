@@ -3,6 +3,11 @@
     <div class="card p-4">
       <%= form_for @conn, Routes.user_session_path(@conn, :create), [as: :user, class: "card-body"], fn f -> %>
         <h1>Login</h1>
+        <%= if @error_message do %>
+          <div class="alert alert-danger">
+            <p><%= @error_message %></p>
+          </div>
+        <% end %>
         <p class="text-muted">Sign In to your account</p>
         <div class="input-group mb-3">
           <div class="input-group-prepend"><span class="input-group-text">
