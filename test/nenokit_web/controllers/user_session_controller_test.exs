@@ -11,9 +11,8 @@ defmodule NenokitWeb.UserSessionControllerTest do
     test "renders login page", %{conn: conn} do
       conn = get(conn, Routes.user_session_path(conn, :new))
       response = html_response(conn, 200)
-      assert response =~ "<h1>Login</h1>"
-      assert response =~ "Login</a>"
-      assert response =~ "Register</a>"
+      assert response =~ "Login"
+      assert response =~ "Register"
     end
 
     test "redirects if already logged in", %{conn: conn, user: user} do

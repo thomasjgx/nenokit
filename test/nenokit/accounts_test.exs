@@ -53,12 +53,13 @@ defmodule Nenokit.AccountsTest do
 
       assert %{
                password: ["can't be blank"],
-               email: ["can't be blank"]
+               email: ["can't be blank"],
+               name: ["can't be blank"]
              } = errors_on(changeset)
     end
 
     test "validates email and password when given" do
-      {:error, changeset} = Accounts.register_user(%{email: "not valid", password: "not valid"})
+      {:error, changeset} = Accounts.register_user(%{name: "Sample User", email: "not valid", password: "not valid"})
 
       assert %{
                email: ["must have the @ sign and no spaces"],
@@ -68,24 +69,24 @@ defmodule Nenokit.AccountsTest do
 
     test "validates maximum values for e-mail and password for security" do
       too_long = String.duplicate("db", 100)
-      {:error, changeset} = Accounts.register_user(%{email: too_long, password: too_long})
+      {:error, changeset} = Accounts.register_user(%{name: "Sample User", email: too_long, password: too_long})
       assert "should be at most 160 character(s)" in errors_on(changeset).email
       assert "should be at most 80 character(s)" in errors_on(changeset).password
     end
 
     test "validates e-mail uniqueness" do
       %{email: email} = user_fixture()
-      {:error, changeset} = Accounts.register_user(%{email: email})
+      {:error, changeset} = Accounts.register_user(%{name: "Sample User", email: email})
       assert "has already been taken" in errors_on(changeset).email
 
       # Now try with the upper cased e-mail too, to check that email case is ignored.
-      {:error, changeset} = Accounts.register_user(%{email: String.upcase(email)})
+      {:error, changeset} = Accounts.register_user(%{name: "Sample User", email: String.upcase(email)})
       assert "has already been taken" in errors_on(changeset).email
     end
 
     test "registers users with a hashed password" do
       email = unique_user_email()
-      {:ok, user} = Accounts.register_user(%{email: email, password: valid_user_password()})
+      {:ok, user} = Accounts.register_user(%{name: "Sample User", email: email, password: valid_user_password()})
       assert user.email == email
       assert is_binary(user.hashed_password)
       assert is_nil(user.confirmed_at)
@@ -96,7 +97,7 @@ defmodule Nenokit.AccountsTest do
   describe "change_user_registration/2" do
     test "returns a changeset" do
       assert %Ecto.Changeset{} = changeset = Accounts.change_user_registration(%User{})
-      assert changeset.required == [:password, :email]
+      assert changeset.required == [:password, :email, :name]
     end
   end
 

@@ -15,7 +15,10 @@ import "../css/app.scss"
 import "phoenix_html"
 
 import 'bootstrap'
+import coreui from '../node_modules/@coreui/coreui/dist/js/coreui.bundle.min.js'
+
 import $ from 'jquery'
 
+window.coreui = coreui
 window.jQuery = $
 window.$ = $

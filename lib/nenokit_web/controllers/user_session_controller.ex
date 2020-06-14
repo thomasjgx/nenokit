@@ -4,6 +4,8 @@ defmodule NenokitWeb.UserSessionController do
   alias Nenokit.Accounts
   alias NenokitWeb.UserAuth
 
+  plug :put_layout, "session.html"
+
   def new(conn, _params) do
     render(conn, "new.html", error_message: nil)
   end

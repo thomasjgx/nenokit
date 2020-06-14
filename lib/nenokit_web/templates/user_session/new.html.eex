@@ -1,19 +1,41 @@
-<%= form_for @conn, Routes.user_session_path(@conn, :create), [as: :user, class: "form-signin mt-5"], fn f -> %>
-  <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-  <label for="inputEmail" class="sr-only">Email address</label>
-  <%= text_input f, :email, required: true, class: "form-control", placeholder: "Email address" %>
-  <label for="inputPassword" class="sr-only">Password</label>
-  <%= password_input f, :password, required: true, class: "form-control", placeholder: "Password" %>
-  <div class="checkbox mb-3">
-    <label>
-      <%= checkbox f, :remember_me %> Remember me
-    </label>
+<div class="col-md-8">
+  <div class="card-group">
+    <div class="card p-4">
+      <%= form_for @conn, Routes.user_session_path(@conn, :create), [as: :user, class: "card-body"], fn f -> %>
+        <h1>Login</h1>
+        <p class="text-muted">Sign In to your account</p>
+        <div class="input-group mb-3">
+          <div class="input-group-prepend"><span class="input-group-text">
+            <i class="cil-user"></i>
+          </span></div>
+          <%= text_input f, :email, required: true, class: "form-control", placeholder: "Email address" %>
+        </div>
+        <div class="input-group mb-4">
+          <div class="input-group-prepend"><span class="input-group-text">
+            <i class="cil-lock-locked"></i>
+          </span></div>
+          <%= password_input f, :password, required: true, class: "form-control", placeholder: "Password" %>
+        </div>
+        <div class="row">
+          <div class="col-6">
+            <%= submit "Login", class: "btn btn-primary px-4" %>
+          </div>
+          <div class="col-6 text-right">
+            <%= link "Forgot password?", to: Routes.user_reset_password_path(@conn, :new), class: "btn btn-link px-0" %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+    <div class="card text-white bg-primary py-5 d-md-down-none" style="width:44%">
+      <div class="card-body text-center">
+        <div>
+          <h2>Sign up</h2>
+          <p>
+            Don't have an account? Sign up to access more features and get notifications on your email or phone.
+          </p>
+          <%= link "Register Now!", to: Routes.user_registration_path(@conn, :new), class: "btn btn-lg btn-outline-light mt-3" %>
+        </div>
+      </div>
+    </div>
   </div>
-  <%= submit "Login", class: "btn btn-lg btn-primary btn-block" %>
-  <p class="mt-4 mb-3 text-muted">
-    <%= link "Forgot your password?", to: Routes.user_reset_password_path(@conn, :new) %>
-  </p>
-  <p class="mt-4 mb-3 text-muted">
-    &copy; 2020
-  </p>
-<% end %>
+</div>

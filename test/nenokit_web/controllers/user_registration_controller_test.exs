@@ -46,7 +46,7 @@ defmodule NenokitWeb.UserRegistrationControllerTest do
         })
 
       response = html_response(conn, 200)
-      assert response =~ "<h1>Register</h1>"
+      assert response =~ "Create an account"
       assert response =~ "must have the @ sign and no spaces"
       assert response =~ "should be at least 12 character"
     end

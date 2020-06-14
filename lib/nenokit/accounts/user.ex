@@ -4,10 +4,13 @@ defmodule Nenokit.Accounts.User do
 
   @derive {Inspect, except: [:password]}
   schema "users" do
+    field :name, :string
     field :email, :string
+    field :phone, :string
     field :password, :string, virtual: true
     field :hashed_password, :string
     field :confirmed_at, :naive_datetime
+    field :extra_fields, :map
 
     timestamps()
   end
@@ -22,7 +25,8 @@ defmodule Nenokit.Accounts.User do
   """
   def registration_changeset(user, attrs) do
     user
-    |> cast(attrs, [:email, :password])
+    |> cast(attrs, [:name, :email, :phone, :password, :extra_fields])
+    |> validate_required([:name])
     |> validate_email()
     |> validate_password()
   end
@@ -39,7 +43,7 @@ defmodule Nenokit.Accounts.User do
   defp validate_password(changeset) do
     changeset
     |> validate_required([:password])
-    |> validate_length(:password, min: 12, max: 80)
+    |> validate_length(:password, min: 6, max: 80)
     # |> validate_format(:password, ~r/[a-z]/, message: "at least one lower case character")
     # |> validate_format(:password, ~r/[A-Z]/, message: "at least one upper case character")
     # |> validate_format(:password, ~r/[!?@#$%^&*_0-9]/, message: "at least one digit or punctuation character")

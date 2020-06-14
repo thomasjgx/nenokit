@@ -5,6 +5,8 @@ defmodule NenokitWeb.UserResetPasswordController do
 
   plug :get_user_by_reset_password_token when action in [:edit, :update]
 
+  plug :put_layout, "session.html"
+
   def new(conn, _params) do
     render(conn, "new.html")
   end

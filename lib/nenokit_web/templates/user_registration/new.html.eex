@@ -1,15 +1,46 @@
-<%= form_for @changeset, Routes.user_registration_path(@conn, :create), [as: :user, class: "form-signin mt-5"], fn f -> %>
-  <h1 class="h3 mb-3 font-weight-normal">Create an account</h1>
-  <label for="inputEmail" class="sr-only">Email address</label>
-  <%= text_input f, :email, required: true, class: "form-control", placeholder: "Email address" %>
-  <label for="inputPassword" class="sr-only">Password</label>
-  <%= password_input f, :password, required: true, class: "form-control", placeholder: "Password" %>
-  <%= submit "Sign Up", class: "btn btn-lg btn-primary btn-block mt-4" %>
-  <p class="mt-4 mb-3 text-muted">
-    <%= link "Already have an account?", to: Routes.user_session_path(@conn, :new) %>
-  </p>
-  <p class="mt-4 mb-3 text-muted">
-    &copy; 2020
-  </p>
-<% end %>
-
+<div class="col-md-6">
+  <%= form_for @changeset, Routes.user_registration_path(@conn, :create), [as: :user, class: "card mx-4"], fn f -> %>
+    <div class="card-body p-4">
+      <h1>Register</h1>
+      <p class="text-muted">Create your account</p>
+      <div class="input-group mb-3">
+        <div class="input-group-prepend"><span class="input-group-text">
+          <i class="cil-user"></i>
+        </span></div>
+        <%= text_input f, :name, required: true, class: "form-control", placeholder: "Name" %>
+      </div>
+      <div class="input-group mb-3">
+        <div class="input-group-prepend"><span class="input-group-text">
+          <i class="cil-phone"></i>
+        </span></div>
+        <%= text_input f, :phone, required: false, class: "form-control", placeholder: "Phone" %>
+      </div>
+      <div class="input-group mb-3">
+        <div class="input-group-prepend"><span class="input-group-text">
+          <i class="cil-envelope-open"></i>
+        </span></div>
+        <%= text_input f, :email, required: true, class: "form-control", placeholder: "Email" %>
+      </div>
+      <div class="input-group mb-3">
+        <div class="input-group-prepend"><span class="input-group-text">
+          <i class="cil-lock-locked"></i>
+        </span></div>
+        <%= password_input f, :password, required: true, class: "form-control", placeholder: "Password" %>
+      </div>
+      <div class="input-group mb-4">
+        <div class="input-group-prepend"><span class="input-group-text">
+          <i class="cil-lock-locked"></i>
+        </span></div>
+        <%= password_input f, :password_confirmation, required: true, class: "form-control", placeholder: "Repeat password" %>
+      </div>
+      <%= submit "Sign Up", class: "btn btn-block btn-success" %>
+    </div>
+    <div class="card-footer p-4">
+      <div class="row">
+        <div class="col-12" align="center">
+          <a href="<%= Routes.user_session_path(@conn, :new) %>">Already have an account? Sign in</a>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

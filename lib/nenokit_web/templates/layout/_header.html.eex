@@ -11,12 +11,12 @@
       <ul class="navbar-nav mr-auto">
       </ul>
       <%= form_for @conn, Routes.page_path(@conn, :search), [class: "form-inline my-2 my-md-0"], fn f -> %>
-        <input class="form-control mr-3" type="text" placeholder="Search" aria-label="Search">
+        <%= text_input f, :search, required: true, class: "form-control mr-3", placeholder: "Search" %>
         <ul class="navbar-nav mr-auto">
           <%= if @current_user do %>
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><%= @current_user.email %></a>
-              <div class="dropdown-menu" aria-labelledby="dropdown01">
+              <a class="nav-link dropdown-toggle" href="#" id="accountDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><%= @current_user.name %></a>
+              <div class="dropdown-menu" aria-labelledby="accountDropdown">
                 <%= link "Settings", to: Routes.user_settings_path(@conn, :edit), class: "dropdown-item" %>
                 <%= link "Logout", to: Routes.user_session_path(@conn, :delete), method: :delete, class: "dropdown-item" %>
               </div>
@@ -34,10 +34,10 @@
   <div class="container">
     <div class="collapse navbar-collapse" id="mainMenu">
       <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
+        <li class="nav-item mr-2 active">
           <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item mr-2">
           <a class="nav-link" href="#">About us</a>
         </li>
         <li class="nav-item">

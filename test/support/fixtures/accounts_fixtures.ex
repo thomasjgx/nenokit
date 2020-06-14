@@ -11,6 +11,7 @@ defmodule Nenokit.AccountsFixtures do
     {:ok, user} =
       attrs
       |> Enum.into(%{
+        name: "Sample User",
         email: unique_user_email(),
         password: valid_user_password()
       })
