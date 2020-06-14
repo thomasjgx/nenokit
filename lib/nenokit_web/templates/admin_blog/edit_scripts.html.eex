@@ -1,0 +1,25 @@
+<script>
+  // Quill does not support IE 10 and below so don't load it to prevent console errors
+  if (typeof document.documentMode !== 'number' || document.documentMode > 10) {
+      document.write('\x3Cscript src="/libs/quill/quill.js">\x3C/script>');
+  }
+</script>
+<script>
+  $(function() {
+    if (!window.Quill) {
+      return $('#quill-editor,#quill-toolbar,#quill-bubble-editor,#quill-bubble-toolbar').remove();
+    }
+
+    var editor = new Quill('#quill-editor', {
+      modules: {
+        toolbar: '#quill-toolbar'
+      },
+      placeholder: 'Type something',
+      theme: 'snow'
+    });
+
+    editor.on('editor-change', function(eventName, ...args) {
+      $("#blog_content").val(editor.root.innerHTML);
+    });
+  });
+</script>

@@ -6,8 +6,7 @@ defmodule Nenokit.Accounts.UserNotifier do
   #   * Bamboo - https://hexdocs.pm/bamboo
   #
   defp deliver(to, body) do
-    require Logger
-    Logger.debug(body)
+    NenokitWeb.Email.send_notification(to, "Notification", body)
     {:ok, %{to: to, body: body}}
   end
 

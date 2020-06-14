@@ -1,0 +1,39 @@
+<h4 class="font-weight-bold py-3 mb-0">Users</h4>
+<div class="text-muted small mt-0 mb-4 d-block breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="<%= Routes.admin_path(@conn, :index) %>"><i class="feather icon-home"></i></a></li>
+    <li class="breadcrumb-item active">Users</li>
+  </ol>
+</div>
+
+<div class="card">
+  <div class="card-datatable table-response p-3">
+    <div class="row align-items-center mt-3 mr-3">
+      <div class="col-sm-6"></div>
+    </div>
+    <table class="datatables-simple table table-striped table bordered">
+      <thead>
+        <tr>
+          <th width="5%">#</th>
+          <th width="40%">Name</th>
+          <th width="40%">Email</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+      <%= for user <- @users do %>
+        <tr>
+          <td><%= user.id %></td>
+          <td><%= user.name %></td>
+          <td><%= user.email %></td>
+          <td>
+            <%= link "Show", to: Routes.admin_user_path(@conn, :show, user), class: "btn btn-info btn-sm mr-2" %>
+            <%= link "Edit", to: Routes.admin_user_path(@conn, :edit, user), class: "btn btn-primary btn-sm mr-2"%>
+            <%= link "Delete", to: Routes.admin_user_path(@conn, :delete, user), method: :delete, class: "btn btn-danger btn-sm" %>
+          </td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

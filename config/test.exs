@@ -23,3 +23,7 @@ config :nenokit, NenokitWeb.Endpoint,
 
 # Print only warnings and errors during test
 config :logger, level: :warn
+
+# Bamboo Emailer
+config :nenokit, NenokitWeb.Mailer,
+  adapter: Bamboo.LocalAdapter

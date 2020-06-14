@@ -1,0 +1,31 @@
+<h4 class="font-weight-bold py-3 mb-0">Show Blog</h4>
+<div class="text-muted small mt-0 mb-4 d-block breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="<%= Routes.admin_path(@conn, :index) %>"><i class="feather icon-home"></i></a></li>
+    <li class="breadcrumb-item">Blogs</li>
+    <li class="breadcrumb-item active">Show Blog</li>
+  </ol>
+</div>
+
+<!-- Header -->
+<div class="card mb-4">
+  <div class="card-body">
+    <a href="<%= Routes.admin_blog_path(@conn, :edit, @blog) %>" class="btn btn-primary float-right">Edit Blog</a>
+    <a href="<%= Routes.admin_blog_path(@conn, :index) %>" class="btn btn-primary ml-2 float-right mr-2">Back to Blogs</a>
+    <div class="row">
+      <div class="col">
+        <h4 class="font-weight-bold mb-4"><%= @blog.name %></h4>
+        <div class="text-muted mb-4">
+          Last updated <%= get_days_ago(@blog.updated_at) %>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <div class="text-muted mb-4 ml-3 mt-3 mr-3">
+          <%= raw(@blog.content) %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

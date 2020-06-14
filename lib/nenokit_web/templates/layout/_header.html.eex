@@ -14,7 +14,9 @@
         <%= text_input f, :search, required: true, class: "form-control mr-3", placeholder: "Search" %>
         <ul class="navbar-nav mr-auto">
           <%= if @current_user do %>
-            <li><%= link "Admin", to: Routes.user_registration_path(@conn, :new), class: "btn btn-info mr-3" %></li>
+            <%= if is_admin(@current_user) do %>
+              <li><%= link "Admin", to: Routes.admin_path(@conn, :index), class: "btn btn-info mr-3" %></li>
+            <% end %>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="accountDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><%= @current_user.name %></a>
               <div class="dropdown-menu" aria-labelledby="accountDropdown">

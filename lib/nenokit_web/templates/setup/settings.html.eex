@@ -1,0 +1,58 @@
+<div class="col-md-6">
+  <%= form_for @changeset, Routes.setup_path(@conn, :create), [as: :setting, multipart: true, class: "card mx-4"], fn f -> %>
+    <div class="card-body p-4">
+      <h1>Nenokit Setup</h1>
+      <%= if @changeset.action do %>
+        <div class="alert alert-danger">
+          <p>Oops, something went wrong! Please check the errors below.</p>
+        </div>
+      <% end %>
+      <p class="text-muted">Welcome to your new nenokit website. Let's get started:</p>
+      <%= inputs_for f, :configuration, fn cf -> %>
+        <div class="input-group mb-3">
+          <div class="input-group-prepend"><span class="input-group-text">
+            <i class="cil-settings"></i>
+          </span></div>
+          <%= text_input cf, :site_name, required: true, class: "form-control", placeholder: "Site name" %>
+          <%= error_tag cf, :site_name %>
+        </div>
+        <div class="input-group mb-3">
+          <div class="input-group-prepend"><span class="input-group-text">
+            <i class="cil-settings"></i>
+          </span></div>
+          <%= text_input cf, :site_description, required: true, class: "form-control", placeholder: "Site description" %>
+          <%= error_tag cf, :site_description %>
+        </div>
+        <div class="input-group mb-3">
+          <div class="input-group-prepend"><span class="input-group-text">
+            <i class="cil-settings"></i>
+          </span></div>
+          <%= text_input cf, :site_keywords, required: true, class: "form-control", placeholder: "Site keywords" %>
+          <%= error_tag cf, :site_keywords %>
+        </div>
+        <div class="input-group mb-3">
+          <div class="input-group-prepend"><span class="input-group-text">
+            <i class="cil-settings"></i>
+          </span></div>
+          <%= text_input cf, :site_email, required: true, class: "form-control", placeholder: "Site email" %>
+          <%= error_tag cf, :site_email %>
+        </div>
+        <%= hidden_input cf, :announcement_enabled, value: "no" %>
+        <%= hidden_input cf, :announcement_text %>
+        <%= hidden_input cf, :welcome_message_enabled, value: "yes"  %>
+        <%= hidden_input cf, :welcome_message_subject, value: "Welcome to Nenokit!" %>
+        <%= hidden_input cf, :welcome_message_content, value: "Thank you using Nenokit." %>
+        <%= hidden_input cf, :terms_and_conditions %>
+        <%= hidden_input cf, :privacy_policy %>
+        <%= hidden_input cf, :sso_enabled, value: "no" %>
+        <%= hidden_input cf, :sso_login_url %>
+        <%= hidden_input cf, :sso_registration_url %>
+      <% end %>
+      <%= inputs_for f, :appearance, fn af -> %>
+        <%= hidden_input af, :logo %>
+      <% end  %>
+      <%= submit "Save Settings", class: "btn btn-block btn-success" %>
+    </div>
+  <% end %>
+</div>
+

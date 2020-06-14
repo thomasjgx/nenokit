@@ -52,4 +52,9 @@ config :logger, level: :info
 
 # Finally import the config/prod.secret.exs which loads secrets
 # and configuration from environment variables.
+
+# Bamboo Emailer
+config :nenokit, NenokitWeb.Mailer,
+  adapter: Bamboo.LocalAdapter
+
 import_config "prod.secret.exs"

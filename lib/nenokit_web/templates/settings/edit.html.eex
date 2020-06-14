@@ -1,0 +1,108 @@
+<%= form_for @changeset, Routes.settings_path(@conn, :update), [multipart: true], fn f -> %>
+  <div class="card text-center mb-3">
+    <div class="card-header bg-primary border-0">
+      <h4 align="left" style="color: #FFF; margin-left: 5px;">Settings</h4>
+      <ul class="nav nav-tabs md-tabs-light card-header-tabs nav-responsive-md">
+        <li class="nav-item">
+          <a class="nav-link active" data-toggle="tab" href="#navs-lm-configuration">Configuration</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" data-toggle="tab" href="#navs-lm-appearance">Appearance</a>
+        </li>
+      </ul>
+    </div>
+    <div class="tab-content">
+      <div class="tab-pane fade show active" id="navs-lm-configuration">
+        <div class="card-body" align="left">
+          <%= inputs_for f, :configuration, fn cf -> %>
+            <div class="form-group">
+              <label class="form-label">Site name</label>
+              <%= text_input cf, :site_name, class: "form-control" %>
+              <%= error_tag cf, :site_name %>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Site description</label>
+              <%= text_input cf, :site_description, class: "form-control" %>
+              <%= error_tag cf, :site_description %>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Site keywords</label>
+              <%= text_input cf, :site_keywords, class: "form-control" %>
+              <%= error_tag cf, :site_keywords %>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Site email</label> <br>
+              <%= text_input cf, :site_email, class: "form-control" %>
+              <%= error_tag cf, :site_email %>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Enable welcome message</label> <br>
+              <%= select cf, :welcome_message_enabled, [Yes: :yes, No: :no], class: "form-control" %>
+              <%= error_tag cf, :welcome_message_enabled %>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Welcome message subject</label>
+              <%= text_input cf, :welcome_message_subject, class: "form-control" %>
+              <%= error_tag cf, :welcome_message_subject %>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Welcome message content</label>
+              <%= text_input cf, :welcome_message_content, class: "form-control" %>
+              <%= error_tag cf, :welcome_message_content %>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Terms and conditions</label>
+              <%= textarea cf, :terms_and_conditions, class: "form-control" %>
+              <%= error_tag cf, :terms_and_conditions %>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Privacy Policy</label>
+              <%= textarea cf, :privacy_policy, class: "form-control" %>
+              <%= error_tag cf, :privacy_policy %>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Enable announcement</label> <br>
+              <%= select cf, :announcement_enabled, [Yes: :yes, No: :no], class: "form-control" %>
+              <%= error_tag cf, :announcement_enabled %>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Announcement text</label>
+              <%= text_input cf, :announcement_text, class: "form-control" %>
+              <%= error_tag cf, :announcement_text %>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Enable SSO (Single SignOn - External authentication service)</label> <br>
+              <%= select cf, :sso_enabled, [Yes: :yes, No: :no], class: "form-control" %>
+              <%= error_tag cf, :sso_enabled %>
+            </div>
+            <div class="form-group">
+              <label class="form-label">SSO login URL</label>
+              <%= text_input cf, :sso_login_url, class: "form-control" %>
+              <%= error_tag cf, :sso_login_url %>
+            </div>
+            <div class="form-group">
+              <label class="form-label">SSO registration URL</label>
+              <%= text_input cf, :sso_registration_url, class: "form-control" %>
+              <%= error_tag cf, :sso_registration_url %>
+            </div>
+          <% end %>
+
+          <%= submit "Save changes", class: "btn btn-primary" %> &nbsp;
+        </div>
+      </div>
+      <div class="tab-pane fade" id="navs-lm-appearance">
+        <div class="card-body" align="left">
+          <%= inputs_for f, :appearance, fn af -> %>
+            <div class="form-group">
+              <label class="form-label">Logo</label>
+              <%= file_input af, :logo, class: "form-control" %>
+              <%= error_tag af, :logo %>
+            </div>
+          <% end %>
+
+          <%= submit "Save changes", class: "btn btn-primary" %> &nbsp;
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

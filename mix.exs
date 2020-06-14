@@ -46,7 +46,14 @@ defmodule Nenokit.MixProject do
       {:gettext, "~> 0.11"},
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
-      {:phx_gen_auth, "~> 0.3.0", only: [:dev], runtime: false}
+      {:phx_gen_auth, "~> 0.3.0", only: [:dev], runtime: false},
+      {:arc, "~> 0.11.0"},
+      {:arc_ecto, "~> 0.11.3"},
+      {:bamboo, "~> 1.5"},
+      {:timex, "~> 3.5"},
+      {:poison, "~> 2.2"},
+      {:slugger, "~> 0.3.0"},
+      {:scrivener_ecto, "~> 2.0"}
     ]
   end
 

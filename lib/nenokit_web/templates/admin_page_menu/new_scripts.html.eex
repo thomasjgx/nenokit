@@ -1,0 +1,17 @@
+<script>
+$(function() {
+  if ($("#page_menu_page_id").val() == null || $("#page_menu_page_id").val() == 0) {
+    $("#external_link_group").show();
+  } else {
+    $("#external_link_group").hide();
+  }
+
+  $("#page_menu_page_id").change(() => {
+    if ($("#page_menu_page_id").val() == 0 || $("#page_menu_page_id").val() == 0) {
+      $("#external_link_group").show();
+    } else {
+      $("#external_link_group").hide();
+    } 
+  }); 
+});
+</script>

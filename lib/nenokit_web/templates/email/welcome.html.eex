@@ -1,0 +1,1 @@
+<%= raw(get_settings().configuration.welcome_message_content) %>

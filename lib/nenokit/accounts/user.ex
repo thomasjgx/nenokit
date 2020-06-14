@@ -2,6 +2,9 @@ defmodule Nenokit.Accounts.User do
   use Ecto.Schema
   import Ecto.Changeset
 
+  alias Nenokit.Repo
+  alias Nenokit.Roles.RoleUser
+
   @derive {Inspect, except: [:password]}
   schema "users" do
     field :name, :string
@@ -11,6 +14,9 @@ defmodule Nenokit.Accounts.User do
     field :hashed_password, :string
     field :confirmed_at, :naive_datetime
     field :extra_fields, :map
+
+    has_many :role_users, RoleUser
+    has_many :roles, through: [:role_users, :role]
 
     timestamps()
   end
@@ -116,5 +122,9 @@ defmodule Nenokit.Accounts.User do
     else
       add_error(changeset, :current_password, "is not valid")
     end
+  end
+
+  def preload_roles(user_or_users) do
+    Repo.preload(user_or_users, [roles: :role_permissions])
   end
 end

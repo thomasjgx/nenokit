@@ -1,0 +1,43 @@
+<h4 class="font-weight-bold py-3 mb-0">Blogs</h4>
+<div class="text-muted small mt-0 mb-4 d-block breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="<%= Routes.admin_path(@conn, :index) %>"><i class="feather icon-home"></i></a></li>
+    <li class="breadcrumb-item active">Blog</li>
+  </ol>
+</div>
+
+<div class="card">
+  <div class="card-datatable table-response p-3">
+    <div class="row align-items-center mt-3 mr-3">
+      <div class="col-sm-12">
+        <a class="btn btn-primary float-right mb-3" href="<%= Routes.admin_blog_path(@conn, :new) %>">New Blog</a>
+      </div>
+    </div>
+    <table class="datatables-simple table table-striped table bordered">
+      <thead>
+        <tr>
+          <th width="5%">#</th>
+          <th width="40%">Name</th>
+          <th>Last Updated</th>
+          <th>Created on</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+      <%= for blog <- @blogs do %>
+        <tr>
+          <td><%= blog.id %></td>
+          <td><%= blog.name %></td>
+          <td><%= get_days_ago(blog.updated_at) %></td>
+          <td><%= blog.inserted_at %></td>
+          <td>
+            <%= link "Show", to: Routes.admin_blog_path(@conn, :show, blog), class: "btn btn-info btn-sm mr-2" %>
+            <%= link "Edit", to: Routes.admin_blog_path(@conn, :edit, blog), class: "btn btn-primary btn-sm mr-2"%>
+            <%= link "Delete", to: Routes.admin_blog_path(@conn, :delete, blog), method: :delete, class: "btn btn-danger btn-sm" %>
+          </td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -6,6 +6,8 @@ defmodule Nenokit.Accounts do
   import Ecto.Query, warn: false
   alias Nenokit.Repo
   alias Nenokit.Accounts.{User, UserToken, UserNotifier}
+  alias Nenokit.Roles
+  alias NenokitWeb.Email
 
   ## Database getters
 
@@ -74,9 +76,26 @@ defmodule Nenokit.Accounts do
 
   """
   def register_user(attrs) do
-    %User{}
+   result = %User{}
     |> User.registration_changeset(attrs)
     |> Repo.insert()
+
+    case result do
+      {:ok, user} = success ->
+        # Send a welcome message
+        Email.welcome_message(user.email)
+
+        # Add admin role if this is the first user
+        if get_user_count() == 1 do
+          role = Roles.get_one
+          Roles.add_role_user(role, user)
+          success
+        else
+          success
+        end
+      {:error, _changeset} = error ->
+        error
+    end
   end
 
   @doc """
@@ -228,6 +247,7 @@ defmodule Nenokit.Accounts do
   def get_user_by_session_token(token) do
     {:ok, query} = UserToken.verify_session_token_query(token)
     Repo.one(query)
+    |> User.preload_roles
   end
 
   @doc """
@@ -345,5 +365,12 @@ defmodule Nenokit.Accounts do
       {:ok, %{user: user}} -> {:ok, user}
       {:error, :user, changeset, _} -> {:error, changeset}
     end
+  end
+
+  @doc """
+  Get the number of users in the system
+  """
+  def get_user_count() do
+    Repo.one(from u in User, select: count(u.id))
   end
 end

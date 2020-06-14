@@ -1,0 +1,44 @@
+<h4 class="font-weight-bold py-3 mb-0">Pages</h4>
+<div class="text-muted small mt-0 mb-4 d-block breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="<%= Routes.admin_path(@conn, :index) %>"><i class="feather icon-home"></i></a></li>
+    <li class="breadcrumb-item active">Pages</li>
+  </ol>
+</div>
+
+<div class="card">
+  <div class="card-datatable table-response p-3">
+    <div class="row align-items-center mt-3 mr-3">
+      <div class="col-sm-12">
+        <a class="btn btn-primary float-right mb-3" href="<%= Routes.admin_page_path(@conn, :new) %>">New Page</a>
+        <a class="btn btn-primary float-right mb-3 mr-2" href="<%= Routes.admin_main_menu_path(@conn, :index) %>">Main Menus</a>
+      </div>
+    </div>
+    <table class="datatables-simple table table-striped table bordered">
+      <thead>
+        <tr>
+          <th width="5%">#</th>
+          <th width="40%">Name</th>
+          <th>Last Updated</th>
+          <th>Created on</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+      <%= for page <- @pages do %>
+        <tr>
+          <td><%= page.id %></td>
+          <td><%= page.name %></td>
+          <td><%= get_days_ago(page.updated_at) %></td>
+          <td><%= page.inserted_at %></td>
+          <td>
+            <%= link "Show", to: Routes.admin_page_path(@conn, :show, page), class: "btn btn-info btn-sm mr-2" %>
+            <%= link "Edit", to: Routes.admin_page_path(@conn, :edit, page), class: "btn btn-primary btn-sm mr-2"%>
+            <%= link "Delete", to: Routes.admin_page_path(@conn, :delete, page), method: :delete, class: "btn btn-danger btn-sm" %>
+          </td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
