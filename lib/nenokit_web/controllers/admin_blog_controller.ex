@@ -2,7 +2,6 @@ defmodule NenokitWeb.AdminBlogController do
   use NenokitWeb, :controller
 
   alias Nenokit.{Pages, Pages.Blogs, AuditTrails}
-  alias NenokitWeb.Authentication
 
   def index(conn, _params) do
     blogs = Blogs.list_blogs
@@ -16,7 +15,7 @@ defmodule NenokitWeb.AdminBlogController do
   end
 
   def create(conn, %{"blog" => params}) do
-    current_user = Authentication.get_current_user(conn)
+    current_user = conn.assigns.current_user
     case Blogs.create_blog(current_user, params) do
       {:ok, blog} ->
         # Log action in audit trial
@@ -48,7 +47,7 @@ defmodule NenokitWeb.AdminBlogController do
     case Blogs.update_blog(blog, blog_params) do
       {:ok, blog} ->
         # Log action in audit trial
-        current_user = Authentication.get_current_user(conn)
+        current_user = conn.assigns.current_user
         AuditTrails.create_audit_trail(current_user, %{"action" => "Updated a blog", "module" => "admin_blog", "record_id" => blog.id})
 
         conn
@@ -66,7 +65,7 @@ defmodule NenokitWeb.AdminBlogController do
     {:ok, _blog} = Blogs.delete_blog(blog)
 
     # Log action in audit trial
-    current_user = Authentication.get_current_user(conn)
+    current_user = conn.assigns.current_user
     AuditTrails.create_audit_trail(current_user, %{"action" => "Deleted a blog", "module" => "admin_blog", "record_id" => blog.id})
 
     conn

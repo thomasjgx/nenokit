@@ -23,5 +23,6 @@
         </footer>
       </div>
     </div>
+    <%= render_existing @view_module, ~s(#{Path.basename(@view_template, ".html")}_scripts.html), assigns %>
   </body>
 </html>

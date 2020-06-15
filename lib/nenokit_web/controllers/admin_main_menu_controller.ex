@@ -19,7 +19,7 @@ defmodule NenokitWeb.AdminMainMenuController do
     case Pages.create_main_menu(params) do
       {:ok, main_menu} ->
         # Log action in audit trial
-        current_user = Authentication.get_current_user(conn)
+        current_user = conn.assigns.current_user
         AuditTrails.create_audit_trail(current_user, %{"action" => "Created a new main menu", "module" => "admin_main_menu", "record_id" => main_menu.id})
 
         conn
@@ -43,7 +43,7 @@ defmodule NenokitWeb.AdminMainMenuController do
     case Pages.update_main_menu(main_menu, main_menu_params) do
       {:ok, main_menu} ->
         # Log action in audit trial
-        current_user = Authentication.get_current_user(conn)
+        current_user = conn.assigns.current_user
         AuditTrails.create_audit_trail(current_user, %{"action" => "Updated a main menu", "module" => "admin_main_menu", "record_id" => main_menu.id})
 
         conn
@@ -61,7 +61,7 @@ defmodule NenokitWeb.AdminMainMenuController do
     {:ok, _main_menu} = Pages.delete_main_menu(main_menu)
 
     # Log action in audit trial
-    current_user = Authentication.get_current_user(conn)
+    current_user = conn.assigns.current_user
     AuditTrails.create_audit_trail(current_user, %{"action" => "Deleted a main menu", "module" => "admin_main_menu", "record_id" => main_menu.id})
 
     conn

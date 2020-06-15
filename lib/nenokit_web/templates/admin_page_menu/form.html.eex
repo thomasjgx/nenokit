@@ -1,28 +1,23 @@
 <%= form_for @changeset, @action, [], fn f -> %>
-<div class="card">
-  <div class="card-body pb-2">
-    <div class="form-group">
-      <label class="form-label">Name</label>
-      <%= text_input f, :name, class: "form-control" %>
-      <%= error_tag f, :name %>
-    </div>
-    <div class="form-group">
-      <label class="form-label">Page</label>
-      <%= select f, :page_id, [{"External link...", nil}] ++ @pages, class: "form-control" %>
-      <%= error_tag f, :page_id %>
-    </div>
-    <div class="form-group" id="external_link_group" style="display: none;">
-      <label class="form-label">External link</label>
-      <%= text_input f, :external_link, class: "form-control" %>
-      <%= error_tag f, :external_link %>
-    </div>
-    <div class="form-group">
-      <label class="form-label">Menu Index</label>
-      <%= number_input f, :menu_index, class: "form-control" %>
-      <%= error_tag f, :menu_index %>
-    </div>
-    <%= submit "Save changes", class: "btn btn-primary mb-5 mt-2" %> &nbsp;
-    </div>
+  <div class="form-group">
+    <label class="form-label">Name</label>
+    <%= text_input f, :name, class: "form-control" %>
+    <%= error_tag f, :name %>
   </div>
-</div>
+  <div class="form-group">
+    <label class="form-label">Page</label>
+    <%= select f, :page_id, [{"External link...", nil}] ++ @pages, class: "form-control" %>
+    <%= error_tag f, :page_id %>
+  </div>
+  <div class="form-group" id="external_link_group" style="display: none;">
+    <label class="form-label">External link</label>
+    <%= text_input f, :external_link, class: "form-control" %>
+    <%= error_tag f, :external_link %>
+  </div>
+  <div class="form-group">
+    <label class="form-label">Menu Index</label>
+    <%= number_input f, :menu_index, class: "form-control" %>
+    <%= error_tag f, :menu_index %>
+  </div>
+  <%= submit "Save changes", class: "btn btn-primary mb-2 mt-2" %>
 <% end %>

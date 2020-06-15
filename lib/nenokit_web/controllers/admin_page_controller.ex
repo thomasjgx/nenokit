@@ -2,7 +2,6 @@ defmodule NenokitWeb.AdminPageController do
   use NenokitWeb, :controller
 
   alias Nenokit.{Pages, AuditTrails}
-  alias NenokitWeb.Authentication
 
   def index(conn, _params) do
     pages = Pages.list_pages
@@ -18,7 +17,7 @@ defmodule NenokitWeb.AdminPageController do
     case Pages.create_page(params) do
       {:ok, page} ->
         # Log action in audit trial
-        current_user = Authentication.get_current_user(conn)
+        current_user = conn.assigns.current_user
         AuditTrails.create_audit_trail(current_user, %{"action" => "Created a new page", "module" => "admin_page", "record_id" => page.id})
 
         conn
@@ -45,7 +44,7 @@ defmodule NenokitWeb.AdminPageController do
     case Pages.update_page(page, page_params) do
       {:ok, page} ->
         # Log action in audit trial
-        current_user = Authentication.get_current_user(conn)
+        current_user = conn.assigns.current_user
         AuditTrails.create_audit_trail(current_user, %{"action" => "Updated a page", "module" => "admin_page", "record_id" => page.id})
 
         conn
@@ -62,7 +61,7 @@ defmodule NenokitWeb.AdminPageController do
     {:ok, _page} = Pages.delete_page(page)
 
     # Log action in audit trial
-    current_user = Authentication.get_current_user(conn)
+    current_user = conn.assigns.current_user
     AuditTrails.create_audit_trail(current_user, %{"action" => "Deleted a page", "module" => "admin_page", "record_id" => page.id})
 
     conn

@@ -16,9 +16,9 @@
       <i class="c-sidebar-nav-icon cil-user"></i> Users</a></li>
     <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="<%= Routes.admin_role_path(@conn, :index) %>">
       <i class="c-sidebar-nav-icon cil-user"></i> Roles</a></li>
-    <li class="c-sidebar-nav-title">Settings</li>
+    <li class="c-sidebar-nav-title">Site</li>
     <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="<%= Routes.settings_path(@conn, :edit) %>">
-      <i class="c-sidebar-nav-icon cil-settings"></i> Edit</a></li>
+      <i class="c-sidebar-nav-icon cil-settings"></i> Settings</a></li>
   </ul>
   <button class="c-sidebar-minimizer c-class-toggler" type="button" data-target="_parent" data-class="c-sidebar-minimized"></button>
 </div>

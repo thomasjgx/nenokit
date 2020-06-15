@@ -2,7 +2,6 @@ defmodule NenokitWeb.AdminRoleController do
   use NenokitWeb, :controller
 
   alias Nenokit.{Roles, Roles.Permission, Accounts, AuditTrails}
-  alias NenokitWeb.Authentication
 
   def index(conn, _params) do
     roles = Roles.list_roles
@@ -22,7 +21,7 @@ defmodule NenokitWeb.AdminRoleController do
     case Roles.create_role(params) do
       {:ok, role} ->
         # Log action in audit trial
-        current_user = Authentication.get_current_user(conn)
+        current_user = conn.assigns.current_user
         AuditTrails.create_audit_trail(current_user, %{"action" => "Created a new role", "module" => "admin_role", "record_id" => role.id})
 
         conn
@@ -52,7 +51,7 @@ defmodule NenokitWeb.AdminRoleController do
     case Roles.update_role(role, role_params) do
       {:ok, role} ->
         # Log action in audit trial
-        current_user = Authentication.get_current_user(conn)
+        current_user = conn.assigns.current_user
         AuditTrails.create_audit_trail(current_user, %{"action" => "Updated a role", "module" => "admin_role", "record_id" => role.id})
 
         conn
@@ -73,7 +72,7 @@ defmodule NenokitWeb.AdminRoleController do
     {:ok, _role} = Roles.delete_role(role)
 
     # Log action in audit trial
-    current_user = Authentication.get_current_user(conn)
+    current_user = conn.assigns.current_user
     AuditTrails.create_audit_trail(current_user, %{"action" => "Deleted a role", "module" => "admin_role", "record_id" => role.id})
 
     conn

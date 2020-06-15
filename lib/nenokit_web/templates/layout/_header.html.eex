@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-light" style="background: #FFFFFF;">
   <div class="container">
     <a class="navbar-brand" href="<%= Routes.page_path(@conn, :index) %>">
       <img src="<%= Routes.static_path(@conn, "/images/logo.png") %>" class="site-logo">
@@ -33,19 +33,25 @@
     </div>
   </div>
 </nav>
+
+<%= if length(assigns.main_menus) > 0 do %>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container">
     <div class="collapse navbar-collapse" id="mainMenu">
       <ul class="navbar-nav mr-auto">
+        <%= for menu <- assigns.main_menus do %>
         <li class="nav-item mr-2 active">
-          <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+          <a class="nav-link" href="<%= 
+            if menu.page_id == nil do
+              menu.external_link
+            else
+              Routes.page_path(@conn, :page, menu.page_id)
+            end
+          %>"><%= menu.name %></a>
         </li>
-        <li class="nav-item mr-2">
-          <a class="nav-link" href="#">About us</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Get in touch!</a>
-        </li>
+        <% end %>
+      </u>
     </div>
   </div>
 </nav>
+<% end %>

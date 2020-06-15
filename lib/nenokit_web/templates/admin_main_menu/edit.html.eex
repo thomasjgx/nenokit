@@ -1,13 +1,6 @@
-<h4 class="font-weight-bold py-3 mb-0">Edit Menu</h4>
-
-<div class="text-muted small mt-0 mb-4 d-block breadcrumb">
-  <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="<%= Routes.admin_path(@conn, :index) %>"><i class="feather icon-home"></i></a></li>
-    <li class="breadcrumb-item"><a href="<%= Routes.admin_page_path(@conn, :index) %>">Pages</a></li>
-    <li class="breadcrumb-item"><a href="<%= Routes.admin_main_menu_path(@conn, :index) %>">Main Menus</a></li>
-    <li class="breadcrumb-item active">Edit</li>
-  </ol>
+<div class="card">
+  <div class="card-header">Edit Menu</div>
+  <div class="card-body">
+    <%= render "form.html", Map.put(assigns, :action, Routes.admin_main_menu_path(@conn, :update, @main_menu)) %>
+  </div>
 </div>
-
-
-<%= render "form.html", Map.put(assigns, :action, Routes.admin_main_menu_path(@conn, :update, @main_menu)) %>

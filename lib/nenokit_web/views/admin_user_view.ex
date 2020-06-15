@@ -13,10 +13,6 @@ defmodule NenokitWeb.AdminUserView do
     Routes.admin_main_menu_path(conn, :edit, record_id)
   end 
 
-  def get_route_from_audit(conn, "admin_page_menu", record_id) do
-    Routes.admin_page_menu_path(conn, :edit, record_id)
-  end 
-  
   def get_route_from_audit(conn, "admin_blog", record_id) do
     Routes.admin_blog_path(conn, :show, record_id)
   end 

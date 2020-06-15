@@ -373,4 +373,18 @@ defmodule Nenokit.Accounts do
   def get_user_count() do
     Repo.one(from u in User, select: count(u.id))
   end
+  
+  @doc """
+  Gets a list of all the users
+  """
+  def list_users() do
+    Repo.all(User)
+  end
+
+  @doc """
+  Delete's a user's account
+  """
+  def delete_user(user) do
+   Repo.delete(user) 
+  end
 end

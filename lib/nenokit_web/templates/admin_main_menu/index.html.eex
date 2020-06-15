@@ -1,15 +1,7 @@
-<h4 class="font-weight-bold py-3 mb-0">Main Menus</h4>
-<div class="text-muted small mt-0 mb-4 d-block breadcrumb">
-  <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="<%= Routes.admin_path(@conn, :index) %>"><i class="feather icon-home"></i></a></li>
-    <li class="breadcrumb-item"><a href="<%= Routes.admin_page_path(@conn, :index) %>">Pages</a></li>
-    <li class="breadcrumb-item active">Main Menus</li>
-  </ol>
-</div>
-
 <div class="card">
+  <div class="card-header">Main Menus</div>
   <div class="card-datatable table-response p-3">
-    <div class="row align-items-center mt-3 mr-3">
+    <div class="row align-items-center mr-3">
       <div class="col-sm-12">
         <a class="btn btn-primary float-right mb-3" href="<%= Routes.admin_main_menu_path(@conn, :new) %>">New Menu</a>
       </div>
