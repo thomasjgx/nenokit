@@ -66,6 +66,7 @@ defmodule NenokitWeb.Router do
     pipe_through [:browser, :settings]
 
     get "/", PageController, :index
+    get "/page/:id", PageController, :page
     post "/search", PageController, :search
   end
 

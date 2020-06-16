@@ -1,0 +1,9 @@
+<div class="card text-center mt-4 p-5">
+  <div class="card-body">
+    <h4 class="card-title">Welcome to Nenokit!</h4>
+    <p class="card-text">No pages found</p>
+    <p class="card-text">
+      <small class="text-muted">Log in as an admin to create pages</small>
+    </p>
+  </div>
+</div>

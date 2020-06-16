@@ -1,0 +1,15 @@
+<div class="list-group" id="list-tab" role="tablist">
+  <%= for page_menu <- @page_menus do %>
+    <a 
+      class="list-group-item list-group-item-action" 
+      id="list-home-list" 
+      href="<%=
+      if page_menu.page_id == nil do
+        page_menu.external_link 
+      else
+        Routes.page_path(@conn, :page, page_menu.page_id) 
+      end
+      %>" 
+    ><%= page_menu.name %></a>
+  <% end %>
+</div>

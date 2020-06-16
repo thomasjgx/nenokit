@@ -15,18 +15,18 @@ defmodule Nenokit.Accounts.UserNotifier do
   """
   def deliver_confirmation_instructions(user, url) do
     deliver(user.email, """
-
-    ==============================
-
-    Hi #{user.email},
-
-    You can confirm your account by visiting the url below:
-
-    #{url}
-
-    If you didn't create an account with us, please ignore this.
-
-    ==============================
+    <br>
+    ============================== <br>
+    <br>
+    Hi #{user.email},<br>
+    <br>
+    You can confirm your account by visiting the url below:<br>
+    <br>
+    #{url}<br>
+    <br>
+    If you didn't create an account with us, please ignore this.<br>
+    <br>
+    ==============================<br>
     """)
   end
 
@@ -35,18 +35,18 @@ defmodule Nenokit.Accounts.UserNotifier do
   """
   def deliver_reset_password_instructions(user, url) do
     deliver(user.email, """
-
-    ==============================
-
-    Hi #{user.email},
-
-    You can reset your password by visiting the url below:
-
-    #{url}
-
-    If you didn't request this change, please ignore this.
-
-    ==============================
+    <br>
+    ==============================<br>
+    <br>
+    Hi #{user.email},<br>
+    <br>
+    You can reset your password by visiting the url below:<br>
+    <br>
+    #{url}<br>
+    <br>
+    If you didn't request this change, please ignore this.<br>
+    <br>
+    ==============================<br>
     """)
   end
 
@@ -55,18 +55,18 @@ defmodule Nenokit.Accounts.UserNotifier do
   """
   def deliver_update_email_instructions(user, url) do
     deliver(user.email, """
-
-    ==============================
-
-    Hi #{user.email},
-
-    You can change your e-mail by visiting the url below:
-
-    #{url}
-
-    If you didn't request this change, please ignore this.
-
-    ==============================
+    <br>
+    ==============================<br>
+    <br>
+    Hi #{user.email},<br>
+    <br>
+    You can change your e-mail by visiting the url below:<br>
+    <br>
+    #{url}<br>
+    <br>
+    If you didn't request this change, please ignore this.<br>
+    <br>
+    ==============================<br>
     """)
   end
 end

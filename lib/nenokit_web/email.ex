@@ -11,7 +11,7 @@ defmodule NenokitWeb.Email do
       base_email(settings)
       |> to(email_address)
       |> subject(settings.configuration.welcome_message_subject)
-      |> render(:welcome)
+      |> render(:welcome, content: settings.configuration.welcome_message_content)
       |> Mailer.deliver_later
     end
   end
@@ -22,9 +22,8 @@ defmodule NenokitWeb.Email do
     if !is_nil(settings) do
       base_email(settings)
       |> to(email_address)
-      |> subject(subject)
-      |> text_body(body)
-      |> html_body(body)
+      |> subject("#{settings.configuration.site_name}: #{subject}")
+      |> render(:welcome, content: body)
       |> Mailer.deliver_later
     end
   end
