@@ -11,6 +11,11 @@ defmodule Nenokit.Pages.Blogs do
     Repo.all(Blog)
   end
 
+  def search_blogs(search) do
+    Repo.all(from b in Blog, select: b, where: ilike(b.name, ^"%#{search}%"), order_by: [desc: :inserted_at])
+    |> Repo.preload(:author)
+  end
+
   def list_blogs_by_page(page_id) do
     Repo.all(from b in Blog, select: b, where: b.page_id == ^page_id, order_by: [desc: :inserted_at])
     |> Repo.preload(:author)
@@ -35,6 +40,7 @@ defmodule Nenokit.Pages.Blogs do
 
   def get_blog(id) do
     Repo.get(Blog, id)
+    |> Repo.preload(:author)
   end
 
   def get_blog_count() do

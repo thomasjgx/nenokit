@@ -67,6 +67,7 @@ defmodule NenokitWeb.Router do
 
     get "/", PageController, :index
     get "/page/:id", PageController, :page
+    get "/blog/:id", PageController, :blog
     post "/search", PageController, :search
   end
 

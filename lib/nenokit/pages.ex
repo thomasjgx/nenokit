@@ -11,6 +11,10 @@ defmodule Nenokit.Pages do
     Repo.all(from p in Page, select: p, order_by: [asc: :id])
   end
 
+  def search_pages(search) do
+    Repo.all(from p in Page, select: p, where: ilike(p.name, ^"%#{search}%"), order_by: [asc: :id])
+  end
+
   def change_page(page \\ %Page{}) do
     Page.changeset(page, %{})
   end

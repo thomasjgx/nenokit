@@ -21,8 +21,15 @@ defmodule NenokitWeb.PageController do
     render(conn, "page.html", page: page, blogs: blogs, page_menus: page_menus)
   end
 
-  def search(conn, _params) do
-    render(conn, "search.html")
+  def blog(conn, %{"id" => id}) do
+    blog = Blogs.get_blog(id)
+    render(conn, "blog.html", blog: blog)
+  end
+
+  def search(conn, %{"search" => search}) do
+    pages = Pages.search_pages(search)
+    blogs = Blogs.search_blogs(search)
+    render(conn, "search.html", pages: pages, blogs: blogs)
   end
 
   def terms_and_conditions(conn, _params) do

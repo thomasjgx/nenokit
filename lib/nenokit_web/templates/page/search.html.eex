@@ -1,0 +1,56 @@
+<nav aria-label="breadcrumb" role="navigation">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="<%= Routes.page_path(@conn, :index) %>">Home</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Search</li>
+  </ol>
+</nav>
+
+<%= if length(@pages) > 0 do %>
+<div class="col-sm-12 col-xl-12">
+  <div class="card">
+    <div class="card-header"> <%= length(@pages) %> page results</div>
+    <div class="card-body">
+      <div class="list-group">
+        <%= for page <- @pages do %>
+        <a class="list-group-item list-group-item-action flex-column align-items-start" href="<%= Routes.page_path(@conn, :page, page) %>">
+          <div class="d-flex w-100 justify-content-between">
+            <h5 class="mb-1"><%= page.name %></h5>
+          </div>
+          <p class="mb-1"><%= raw(page.content) %></p>
+        </a>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+<% end %>
+
+<%= if length(@blogs) > 0 do %>
+<div class="col-sm-12 col-xl-12">
+  <div class="card">
+    <div class="card-header"> <%= length(@blogs) %> blog results</div>
+    <div class="card-body">
+      <div class="list-group">
+        <%= for blog <- @blogs do %>
+        <a class="list-group-item list-group-item-action flex-column align-items-start" href="<%= Routes.page_path(@conn, :blog, blog) %>">
+          <div class="d-flex w-100 justify-content-between">
+            <h5 class="mb-1"><%= blog.name %></h5>
+          </div>
+          <p class="mb-1"><%= raw(blog.content) %></p>
+        </a>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+<% end %>
+
+<%= if length(@blogs) == 0 and length(@pages) == 0 do %>
+<div class="col-sm-12 col-xl-12">
+  <div class="card">
+    <div class="card-body">
+      No results found
+    </div>
+  </div>
+</div>
+<% end %>
