@@ -1,7 +1,11 @@
 <nav class="navbar navbar-expand-lg navbar-light" style="background: #FFFFFF;">
   <div class="container">
     <a class="navbar-brand" href="<%= Routes.page_path(@conn, :index) %>">
-      <img src="<%= Routes.static_path(@conn, "/images/logo.png") %>" class="site-logo">
+      <%= unless is_nil(assigns.settings.appearance.logo) do %>
+        <img src="<%= get_logo(assigns.settings) %>" alt="Brand Logo" class="site-logo" style="height: 80px;">
+      <% else %>
+        <img src="/images/logo.png" alt="Brand Logo" class="site-logo" style="height: 80px;">
+      <% end %>
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mainMenu" aria-controls="mainMenu" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>

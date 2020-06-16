@@ -7,6 +7,11 @@ defmodule Nenokit.AuditTrails do
   alias Nenokit.Repo
   alias Nenokit.AuditTrails.AuditTrail
 
+  def list_audit_trails() do
+    Repo.all(from a in AuditTrail, select: a, order_by: [desc: :time], limit: 10)
+    |> Repo.preload(:user)
+  end
+
   def list_audit_trails_by_user(user) do
     Repo.all(from a in AuditTrail, select: a, where: a.user_id == ^user.id, order_by: [desc: :time], limit: 10)
   end
