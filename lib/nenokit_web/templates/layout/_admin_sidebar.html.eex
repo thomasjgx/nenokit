@@ -1,13 +1,13 @@
 <div class="c-sidebar c-sidebar-dark c-sidebar-fixed c-sidebar-lg-show" id="sidebar">
-  <div class="c-sidebar-brand d-lg-down-none">
+  <div class="c-sidebar-brand d-lg-down-none" style="background: #FFFFFF;">
     <%= unless is_nil(assigns.settings.appearance.logo) do %>
         <img src="<%= get_logo(assigns.settings) %>" alt="Brand Logo" class="c-sidebar-brand-full" style="height: 46px;">
       <% else %>
-        <img src="/images/logo_white.png" alt="Brand Logo" class="c-sidebar-brand-full" style="height: 46px;">
+        <img src="/images/logo.png" alt="Brand Logo" class="c-sidebar-brand-full" style="height: 46px;">
       <% end %>
-      <img class="c-sidebar-brand-minimized mt-2" src="/images/logo_mini_white.png" height="46" alt="Nenokit" />
+      <img class="c-sidebar-brand-minimized mt-2" src="/images/logo_mini.png" height="46" alt="Nenokit" />
   </div>
-  <ul class="c-sidebar-nav">
+  <ul class="c-sidebar-nav mt-3">
     <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="<%= Routes.admin_path(@conn, :index) %>">
       <i class="c-sidebar-nav-icon cil-home"></i> Dashboard</a></li>
     <li class="c-sidebar-nav-title">Content</li>
