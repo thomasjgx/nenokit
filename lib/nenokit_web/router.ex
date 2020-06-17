@@ -21,7 +21,8 @@ defmodule NenokitWeb.Router do
 
   # Use ensure only admins can access this routes and use admin layout
   pipeline :admin do
-    plug NenokitWeb.Plug.EnsureAdmin
+    plug NenokitWeb.Plugs.EnsureAdmin
+    plug NenokitWeb.Plugs.LoadWorkflows
     plug :put_layout, {NenokitWeb.LayoutView, :admin}
   end
 
@@ -32,32 +33,32 @@ defmodule NenokitWeb.Router do
 
   # Manage pages
   pipeline :manage_pages do
-    plug NenokitWeb.Plug.EnsurePermission, "manage_pages"
+    plug NenokitWeb.Plugs.EnsurePermission, "manage_pages"
   end
 
   # Manage blogs
   pipeline :manage_blogs do
-    plug NenokitWeb.Plug.EnsurePermission, "manage_blogs"
+    plug NenokitWeb.Plugs.EnsurePermission, "manage_blogs"
   end
 
   # Manage surveys
   pipeline :manage_surveys do
-    plug NenokitWeb.Plug.EnsurePermission, "manage_surveys"
+    plug NenokitWeb.Plugs.EnsurePermission, "manage_surveys"
   end
 
   # Manage users
   pipeline :manage_users do
-    plug NenokitWeb.Plug.EnsurePermission, "manage_users"
+    plug NenokitWeb.Plugs.EnsurePermission, "manage_users"
   end
 
   # Manage roles
   pipeline :manage_roles do
-    plug NenokitWeb.Plug.EnsurePermission, "manage_users"
+    plug NenokitWeb.Plugs.EnsurePermission, "manage_users"
   end
 
   # Manage settings
   pipeline :manage_settings do
-    plug NenokitWeb.Plug.EnsurePermission, "manage_settings"
+    plug NenokitWeb.Plugs.EnsurePermission, "manage_settings"
   end
 
   # First run setup
@@ -117,6 +118,12 @@ defmodule NenokitWeb.Router do
 
     # Dashboard
     get "/", AdminController, :index
+
+    # Workflow
+    get "/workflow/:id", WorkflowController, :show
+    get "/workflow/filter/:stage_id", WorkflowController, :filter
+    get "/workflow/submission/:submission_id", WorkflowController, :submission
+    get "/workflow/move_submission/:submission_id/:stage_id", WorkflowController, :move_submission
   end
 
   # Admin: Manage pages

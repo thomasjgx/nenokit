@@ -17,10 +17,20 @@ defmodule NenokitWeb.SurveyController do
         user ->
           user.id
       end
+
+    workflow_stage_id =
+      case survey.schema.submission_stage do
+        nil ->
+          nil
+        stage_id ->
+          stage_id
+      end
+
     submission_params = %{
       "user_id" => user_id,
       "survey_id" => survey.id,
-      "schema" => %{"form_data" => params}
+      "schema" => %{"form_data" => params},
+      "workflow_stage_id" => workflow_stage_id
     }
     case SurveySubmissions.create_survey_submission(submission_params) do
       {:ok, _survey_submission} ->

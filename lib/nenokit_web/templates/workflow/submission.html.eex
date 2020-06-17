@@ -1,0 +1,40 @@
+<div class="card">
+  <div class="card-header">Show Survey Submission</div>
+  <div class="card-body">
+    <div class="dropdown float-right">
+      <button class="btn btn-primary dropdown-toggle mb-3" id="dropdownMenu2" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Move application</button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenu2" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 34px, 0px); top: 0px; left: 0px; will-change: transform;">
+        <%= for stage <- @stages do %>
+          <a href="<%= Routes.workflow_path(@conn, :move_submission, @submission, stage.id) %>" class="dropdown-item" type="button"><%= stage.name %></a>
+        <% end %>
+      </div>
+    </div>
+    <a href="<%= Routes.workflow_path(@conn, :filter, @submission.workflow_stage_id) %>" class="btn btn-primary ml-2 float-right mr-2">Back to workflow stage</a>
+    <div class="row">
+      <div class="col">
+        <h4 class="font-weight-bold mb-4"><%= @survey.name %></h4>
+        <div class="text-muted mb-4">
+          Submitted <%= get_days_ago(@submission.updated_at) %>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="card-body">
+          <table class="table table-responsive-sm">
+            <tbody>
+              <%
+                fields = Poison.decode!(@survey.schema.form_data)
+              %>
+              <tr><th width="30%">Submitted by</th><th><%= @submission.user.name %></th></tr>
+              <tr><th width="30%">Stage</th><th><%= @submission.workflow_stage.name %></th></tr>
+              <%= for field <- fields do %>
+              <tr><td width="30%"><%= field["label"] %></td><td><%= @submission.schema["form_data"][field["name"]] %></td></tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

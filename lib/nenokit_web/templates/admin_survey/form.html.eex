@@ -21,6 +21,11 @@
       <%= error_tag sf, :form_data %>
     </div>
     <div class="form-group">
+      <label class="form-label">Select a submission stage</label> <br>
+      <%= select sf, :submission_stage, [{"", ""}] ++ @stages, class: "form-control" %>
+      <%= error_tag sf, :submission_stage %>
+    </div>
+    <div class="form-group">
       <label class="form-label">Enable survey subscription</label> <br>
       <%= select sf, :enable_survey_subscription, [{"No", "no"}, {"Yes", "yes"}], class: "form-control" %>
       <%= error_tag sf, :enable_survey_subscription %>

@@ -1,4 +1,4 @@
-defmodule NenokitWeb.Plug.EnsureAdmin do
+defmodule NenokitWeb.Plugs.EnsureAdmin do
   @moduledoc """
   This is plug that ensures the logged in user has a particular tole
   """

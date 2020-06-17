@@ -1,7 +1,7 @@
 defmodule NenokitWeb.AdminSurveyController do
   use NenokitWeb, :controller
 
-  alias Nenokit.{Surveys, Surveys.SurveySubmissions, AuditTrails}
+  alias Nenokit.{Surveys, Surveys.SurveySubmissions, Surveys.Workflows, Surveys.WorkflowStages, AuditTrails}
 
   def index(conn, _params) do
     surveys = Surveys.list_surveys
@@ -10,7 +10,7 @@ defmodule NenokitWeb.AdminSurveyController do
 
   def new(conn, _params) do
     changeset = Surveys.change_survey
-    render(conn, "new.html", changeset: changeset, survey: nil)
+    render(conn, "new.html", changeset: changeset, survey: nil, stages: get_stage_options())
   end
 
   def create(conn, %{"survey" => params}) do
@@ -24,7 +24,7 @@ defmodule NenokitWeb.AdminSurveyController do
         |> put_flash(:success, "Survey created successfully")
         |> redirect(to: Routes.admin_survey_path(conn, :show, survey))
       {:error, changeset} ->
-        render(conn, "new.html", changeset: changeset, survey: nil)
+        render(conn, "new.html", changeset: changeset, survey: nil, stages: get_stage_options())
     end
   end
 
@@ -43,7 +43,7 @@ defmodule NenokitWeb.AdminSurveyController do
   def edit(conn, %{"id" => survey_id}) do
     survey = Surveys.get_survey(survey_id)
     changeset = Surveys.change_survey(survey)
-    render(conn, "edit.html", survey: survey, changeset: changeset)
+    render(conn, "edit.html", survey: survey, changeset: changeset, stages: get_stage_options())
   end
 
   def update(conn, %{"id" => survey_id, "survey" => survey_params}) do
@@ -59,7 +59,7 @@ defmodule NenokitWeb.AdminSurveyController do
         |> redirect(to: Routes.admin_survey_path(conn, :show, survey))
 
       {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "edit.html", survey: survey, changeset: changeset)
+        render(conn, "edit.html", survey: survey, changeset: changeset, stages: get_stage_options())
     end
   end
 
@@ -74,5 +74,14 @@ defmodule NenokitWeb.AdminSurveyController do
     conn
     |> put_flash(:info, "Survey deleted successfully.")
     |> redirect(to: Routes.admin_survey_path(conn, :index))
+  end
+
+  defp get_stage_options() do
+    stage_options = Workflows.list_workflows |> Enum.map(fn workflow ->
+      stages = WorkflowStages.list_workflow_stages(workflow.id)
+      {workflow.name, stages |> Enum.map(fn stage ->
+        {stage.name, stage.id}
+      end)}
+    end)
   end
 end

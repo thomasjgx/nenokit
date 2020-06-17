@@ -1,4 +1,4 @@
-defmodule NenokitWeb.Plug.EnsurePermission do
+defmodule NenokitWeb.Plugs.EnsurePermission do
   @moduledoc """
   This is plug that ensures the logged in user has a particular tole
   """

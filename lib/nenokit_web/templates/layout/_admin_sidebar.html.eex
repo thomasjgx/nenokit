@@ -10,21 +10,25 @@
   <ul class="c-sidebar-nav mt-3">
     <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="<%= Routes.admin_path(@conn, :index) %>">
       <i class="c-sidebar-nav-icon cil-home"></i> Dashboard</a></li>
+    <%= for workflow <- assigns.workflows do %>
+    <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="<%= Routes.workflow_path(@conn, :show, workflow) %>">
+      <i class="c-sidebar-nav-icon cil-applications"></i> <%= workflow.name %></a></li>
+    <% end %>
     <li class="c-sidebar-nav-title">Content</li>
     <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="<%= Routes.admin_page_path(@conn, :index) %>">
-      <i class="c-sidebar-nav-icon cil-pencil"></i> Pages</a></li>
+      <i class="c-sidebar-nav-icon cil-paragraph"></i> Pages</a></li>
     <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="<%= Routes.admin_blog_path(@conn, :index) %>">
-      <i class="c-sidebar-nav-icon cil-pencil"></i> Blogs</a></li>
+      <i class="c-sidebar-nav-icon cil-paperclip"></i> Blogs</a></li>
     <li class="c-sidebar-nav-title">Data</li>
     <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="<%= Routes.admin_survey_path(@conn, :index) %>">
-      <i class="c-sidebar-nav-icon cil-pencil"></i> Surveys</a></li>
+      <i class="c-sidebar-nav-icon cil-task"></i> Surveys</a></li>
       <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="<%= Routes.admin_survey_workflow_path(@conn, :index) %>">
-      <i class="c-sidebar-nav-icon cil-pencil"></i> Workflows</a></li>
+      <i class="c-sidebar-nav-icon cil-grid"></i> Workflows</a></li>
     <li class="c-sidebar-nav-title">Security</li>
     <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="<%= Routes.admin_user_path(@conn, :index) %>">
       <i class="c-sidebar-nav-icon cil-user"></i> Users</a></li>
     <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="<%= Routes.admin_role_path(@conn, :index) %>">
-      <i class="c-sidebar-nav-icon cil-user"></i> Roles</a></li>
+      <i class="c-sidebar-nav-icon cil-people"></i> Roles</a></li>
     <li class="c-sidebar-nav-title">Site</li>
     <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="<%= Routes.settings_path(@conn, :edit) %>">
       <i class="c-sidebar-nav-icon cil-settings"></i> Settings</a></li>

@@ -126,6 +126,20 @@ defmodule Nenokit.Accounts do
     User.changeset(user, attrs)
   end
 
+
+
+  @doc """
+  Updates the user 
+  """
+  def update_user(user, attrs) do
+    changeset =
+      user
+      |> User.password_changeset(attrs)
+
+    changeset
+    |> Repo.update(changeset)
+  end
+
   ## Settings
 
   @doc """

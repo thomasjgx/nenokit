@@ -1,0 +1,37 @@
+<div class="card">
+  <div class="card-header"><%= @workflow.name %></div>
+  <div class="card-body">
+    <div align="right">
+      <div class="dropdown">
+        <button class="btn btn-primary dropdown-toggle mb-3" id="dropdownMenu2" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Filter by stage</button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenu2" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 34px, 0px); top: 0px; left: 0px; will-change: transform;">
+          <%= for stage <- @stages do %>
+            <a href="<%= Routes.workflow_path(@conn, :filter, stage.id) %>" class="dropdown-item" type="button"><%= stage.name %></a>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <table class="table table-responsive-sm">
+      <thead>
+        <tr>
+          <th width="20%">Date</th>
+          <th width="20%">Submitted by</th>
+          <th width="40%">Stage</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <%= for submission <- @submissions do %>
+        <tr>
+          <td><%= get_days_ago(submission.inserted_at) %></td>
+          <td><%= if submission.user_id, do: submission.user.name %></td>
+          <td><%= submission.workflow_stage.name %></td>
+          <td>
+            <a href="<%= Routes.workflow_path(@conn, :submission, submission) %>" class="btn btn-primary btn-sm">View</a>
+          </td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

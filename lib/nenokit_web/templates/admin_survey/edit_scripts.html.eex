@@ -3,7 +3,8 @@
 $(function() {
   const fbEditor = document.getElementById('fb-editor');
   const options = {
-    formData: '<%= raw(@survey.schema.form_data) %>'
+    formData: '<%= raw(@survey.schema.form_data) %>',
+    disabledActionButtons: ['data', 'clear', 'save']
   };
   const formBuilder = $(fbEditor).formBuilder(options);
   document.getElementById('submit-form').addEventListener('click', function() {
