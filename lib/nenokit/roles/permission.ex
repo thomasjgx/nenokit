@@ -7,6 +7,7 @@ defmodule Nenokit.Roles.Permission do
     [
       "manage_pages",
       "manage_blogs",
+      "manage_surveys",
       "manage_users",
       "manage_roles",
       "manage_settings",

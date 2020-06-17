@@ -1,0 +1,40 @@
+<%= form_for @changeset, @action, [], fn f -> %>
+  <div class="form-group">
+    <label class="form-label">Name</label>
+    <%= text_input f, :name, class: "form-control" %>
+    <%= error_tag f, :name %>
+  </div>
+  <div class="form-group">
+    <label class="form-label">Description</label>
+    <%= textarea f, :description, class: "form-control mt-2 mb-3" %>
+    <%= error_tag f, :description %>
+  </div>
+  <%= inputs_for f, :schema, fn sf -> %>
+    <div class="form-group">
+      <label class="form-label">Form type</label> <br>
+      <%= select sf, :form_type, [{"Built-in", "built_in"}], class: "form-control" %>
+      <%= error_tag sf, :form_type %>
+    </div>
+    <div class="form-group">
+      <%= hidden_input sf, :form_data, class: "form-control mt-2 mb-3" %>
+      <div id="fb-editor"></div>
+      <%= error_tag sf, :form_data %>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Enable survey subscription</label> <br>
+      <%= select sf, :enable_survey_subscription, [{"No", "no"}, {"Yes", "yes"}], class: "form-control" %>
+      <%= error_tag sf, :enable_survey_subscription %>
+    </div>
+    <div class="form-group">
+      <label class="form-label">If survey subscription is enabled, how do we send surveys?</label> <br>
+      <%= select sf, :survey_subscription_medium, [{"Email", "email"}, {"SMS", "sms"}], class: "form-control" %>
+      <%= error_tag sf, :survey_subscription_medium %>
+    </div>
+    <div class="form-group">
+      <label class="form-label">If survey subscription is enabled, how long before we send a survey? (days)</label>
+      <%= text_input sf, :survey_subscription_start, class: "form-control" %>
+      <%= error_tag sf, :survey_subscription_start %>
+    </div>
+  <% end %>
+  <%= submit "Save changes", class: "btn btn-primary mb-2 mt-2", id: "submit-form" %>
+<% end %>

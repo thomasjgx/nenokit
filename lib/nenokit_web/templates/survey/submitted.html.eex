@@ -1,0 +1,14 @@
+<div class="card mt-3">
+  <div class="card-body">
+    <div class="row">
+      <div class="col">
+        <h4 class="font-weight-bold mb-4"><%= @survey.name %></h4>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        We have received your submission successfully. Thank you.
+      </div>
+    </div>
+  </div>
+</div>

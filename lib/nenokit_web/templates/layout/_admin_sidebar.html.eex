@@ -11,6 +11,11 @@
       <i class="c-sidebar-nav-icon cil-pencil"></i> Pages</a></li>
     <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="<%= Routes.admin_blog_path(@conn, :index) %>">
       <i class="c-sidebar-nav-icon cil-pencil"></i> Blogs</a></li>
+    <li class="c-sidebar-nav-title">Data</li>
+    <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="<%= Routes.admin_survey_path(@conn, :index) %>">
+      <i class="c-sidebar-nav-icon cil-pencil"></i> Surveys</a></li>
+      <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="#">
+      <i class="c-sidebar-nav-icon cil-pencil"></i> Workflows</a></li>
     <li class="c-sidebar-nav-title">Security</li>
     <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="<%= Routes.admin_user_path(@conn, :index) %>">
       <i class="c-sidebar-nav-icon cil-user"></i> Users</a></li>

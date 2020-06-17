@@ -16,9 +16,12 @@ import "phoenix_html"
 
 import 'bootstrap'
 import coreui from '../node_modules/@coreui/coreui/dist/js/coreui.bundle.min.js'
+import formBuilder from 'formBuilder'
 
 import $ from 'jquery'
 
-window.coreui = coreui
 window.jQuery = $
 window.$ = $
+
+window.coreui = coreui
+window.formBuilder = formBuilder

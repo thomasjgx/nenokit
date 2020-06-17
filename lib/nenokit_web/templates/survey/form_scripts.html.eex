@@ -1,0 +1,11 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+<script src="https://formbuilder.online/assets/js/form-render.min.js"></script>
+<script language="javascript">
+$(function() {
+  const formData = '<%= raw(@survey.schema.form_data) %>';
+  $('#fb-render').formRender({
+    dataType: 'json',
+    formData: formData
+  });
+});
+</script>

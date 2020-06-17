@@ -114,6 +114,21 @@ defmodule Nenokit.Accounts do
   ## Settings
 
   @doc """
+  Returns an `%Ecto.Changeset{}` for changing the user.
+
+  ## Examples
+
+      iex> change_user(user)
+      %Ecto.Changeset{data: %User{}}
+
+  """
+  def change_user(user, attrs \\ %{}) do
+    User.changeset(user, attrs)
+  end
+
+  ## Settings
+
+  @doc """
   Returns an `%Ecto.Changeset{}` for changing the user e-mail.
 
   ## Examples

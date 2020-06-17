@@ -40,6 +40,11 @@ defmodule NenokitWeb.Router do
     plug NenokitWeb.Plug.EnsurePermission, "manage_blogs"
   end
 
+  # Manage surveys
+  pipeline :manage_surveys do
+    plug NenokitWeb.Plug.EnsurePermission, "manage_surveys"
+  end
+
   # Manage users
   pipeline :manage_users do
     plug NenokitWeb.Plug.EnsurePermission, "manage_users"
@@ -69,6 +74,9 @@ defmodule NenokitWeb.Router do
     get "/page/:id", PageController, :page
     get "/blog/:id", PageController, :blog
     post "/search", PageController, :search
+
+    get "/survey/:id", SurveyController, :view
+    post "/survey/:id", SurveyController, :submit
   end
 
   ## Authentication routes
@@ -131,6 +139,14 @@ defmodule NenokitWeb.Router do
 
     # Blogs management
     resources "/", AdminBlogController
+  end
+
+  # Admin: Manage surveys
+  scope "/admin/surveys", NenokitWeb do
+    pipe_through [:browser, :settings, :require_authenticated_user, :admin, :manage_surveys]
+
+    # Blogs management
+    resources "/", AdminSurveyController
   end
 
   # Admin: Manage users

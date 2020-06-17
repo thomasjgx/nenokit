@@ -9,7 +9,6 @@
     <meta name="keywords" content="<%= assigns.settings.configuration.site_description %>">
     <meta name="author" content="Thomas Juma <thomasjgx@gmail.com">
     <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/app.css") %>"/>
-    <script defer type="text/javascript" src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
   </head>
   <body>
     <%= render "_header.html", assigns %>
@@ -22,5 +21,7 @@
       <% end %>
       <%= @inner_content %>
     </div>
+    <script type="text/javascript" src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
+    <%= render_existing @view_module, ~s(#{Path.basename(@view_template, ".html")}_scripts.html), assigns %>
   </body>
 </html>

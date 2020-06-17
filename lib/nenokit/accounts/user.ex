@@ -22,6 +22,16 @@ defmodule Nenokit.Accounts.User do
   end
 
   @doc """
+  A user changeset.
+  """
+  def changeset(user, attrs) do
+    user
+    |> cast(attrs, [:name, :email, :phone, :extra_fields])
+    |> validate_required([:name])
+    |> validate_email()
+  end
+
+  @doc """
   A user changeset for registration.
 
   It is important to validate the length of both e-mail and password.

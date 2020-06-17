@@ -1,0 +1,10 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+<script language="javascript">
+$(function() {
+  const fbEditor = document.getElementById('fb-editor');
+  const formBuilder = $(fbEditor).formBuilder();
+  document.getElementById('submit-form').addEventListener('click', function() {
+    $("#survey_schema_form_data").val(formBuilder.actions.getData('json'));
+  });
+});
+</script>
