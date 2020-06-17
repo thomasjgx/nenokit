@@ -34,6 +34,12 @@ defmodule NenokitWeb.AdminSurveyController do
     render(conn, "show.html", survey: survey, submissions: submissions)
   end
 
+  def show_submission(conn, %{"id" => survey_id, "submission_id" => submission_id}) do
+    survey = Surveys.get_survey(survey_id)
+    submission = SurveySubmissions.get_survey_submission(submission_id)
+    render(conn, "show_submission.html", survey: survey, submission: submission)
+  end
+
   def edit(conn, %{"id" => survey_id}) do
     survey = Surveys.get_survey(survey_id)
     changeset = Surveys.change_survey(survey)

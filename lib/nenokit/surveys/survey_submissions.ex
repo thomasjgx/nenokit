@@ -8,7 +8,7 @@ defmodule Nenokit.Surveys.SurveySubmissions do
   alias Nenokit.Surveys.SurveySubmission
 
   def list_survey_submissions_by_survey(survey_id) do
-    Repo.all(from s in SurveySubmission, select: s, where: s.survey_id == ^survey_id, order_by: [asc: :id])
+    Repo.all(from s in SurveySubmission, select: s, where: s.survey_id == ^survey_id, order_by: [desc: :id])
     |> Repo.preload(:user)
   end
 
@@ -30,6 +30,7 @@ defmodule Nenokit.Surveys.SurveySubmissions do
 
   def get_survey_submission(id) do
     Repo.get(SurveySubmission, id)
+    |> Repo.preload(:user)
   end
 
   def delete_survey_submission(survey_submission) do

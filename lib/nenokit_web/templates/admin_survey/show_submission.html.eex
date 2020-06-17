@@ -1,0 +1,31 @@
+<div class="card">
+  <div class="card-header">Show Survey Submission</div>
+  <div class="card-body">
+    <a href="<%= Routes.admin_survey_path(@conn, :show, @survey) %>" class="btn btn-primary ml-2 float-right mr-2">Back to Survey</a>
+    <div class="row">
+      <div class="col">
+        <h4 class="font-weight-bold mb-4"><%= @survey.name %></h4>
+        <div class="text-muted mb-4">
+          Submitted <%= get_days_ago(@submission.updated_at) %>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="card-body">
+          <table class="table table-responsive-sm">
+            <tbody>
+              <%
+                fields = Poison.decode!(@survey.schema.form_data)
+              %>
+              <tr><td width="30%">Submitted by</td><td><%= @submission.user.name %></td></tr>
+              <%= for field <- fields do %>
+              <tr><td width="30%"><%= field["label"] %></td><td><%= @submission.schema["form_data"][field["name"]] %></td></tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

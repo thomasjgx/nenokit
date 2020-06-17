@@ -147,6 +147,7 @@ defmodule NenokitWeb.Router do
 
     # Blogs management
     resources "/", AdminSurveyController
+    get "/:id/show-submission/:submission_id", AdminSurveyController, :show_submission
   end
 
   # Admin: Manage users

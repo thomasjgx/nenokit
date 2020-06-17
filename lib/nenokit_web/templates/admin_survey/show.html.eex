@@ -52,7 +52,7 @@
                     <td><%= submission.schema["form_data"][field["name"]] %></td>
                     <% end %>
                     <td>
-                      <a href="#" class="btn btn-primary btn-sm">View</a>
+                      <a href="<%= Routes.admin_survey_path(@conn, :show_submission, @survey, submission) %>" class="btn btn-primary btn-sm">View</a>
                     </td>
                   </tr>
                   <% end %>
