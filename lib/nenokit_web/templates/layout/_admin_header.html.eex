@@ -9,10 +9,6 @@
     <i class="cil-menu c-icon-lg"></i>
   </button>
   <ul class="c-header-nav ml-auto mr-4">
-    <li class="c-header-nav-item d-md-down-none mx-2"><a class="c-header-nav-link" title="Notifications" href="#">
-      <i class="cil-bell"></i></a></li>
-    <li class="c-header-nav-item d-md-down-none mx-2"><a class="c-header-nav-link" title="Messages" href="#">
-      <i class="cil-envelope-open"></i></a></li>
     <li class="c-header-nav-item dropdown"><a class="c-header-nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
         <div class="c-avatar">
           <i class="cil-user c-icon-lg" style="font-size: 25px;"></i>
