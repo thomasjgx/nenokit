@@ -5,7 +5,9 @@
       <button class="btn btn-primary dropdown-toggle mb-3" id="dropdownMenu2" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Move application</button>
       <div class="dropdown-menu" aria-labelledby="dropdownMenu2" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 34px, 0px); top: 0px; left: 0px; will-change: transform;">
         <%= for stage <- @stages do %>
-          <a href="<%= Routes.workflow_path(@conn, :move_submission, @submission, stage.id) %>" class="dropdown-item" type="button"><%= stage.name %></a>
+          <%= if stage.id !== @submission.workflow_stage_id do %>
+            <a href="<%= Routes.workflow_path(@conn, :move_submission, @submission, stage.id) %>" class="dropdown-item" type="button"><%= stage.name %></a>
+          <% end %>
         <% end %>
       </div>
     </div>
