@@ -77,7 +77,7 @@ defmodule NenokitWeb.AdminSurveyController do
   end
 
   defp get_stage_options() do
-    stage_options = Workflows.list_workflows |> Enum.map(fn workflow ->
+    Workflows.list_workflows |> Enum.map(fn workflow ->
       stages = WorkflowStages.list_workflow_stages(workflow.id)
       {workflow.name, stages |> Enum.map(fn stage ->
         {stage.name, stage.id}

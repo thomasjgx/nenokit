@@ -32,7 +32,7 @@ defmodule NenokitWeb.WorkflowController do
       {:ok, _} ->
         conn
         |> redirect(to: Routes.workflow_path(conn, :submission, submission))
-      {:error, changeset} ->
+      {:error, _changeset} ->
         conn
         |> redirect(to: Routes.workflow_path(conn, :submission, submission))
     end

@@ -5,8 +5,6 @@ defmodule NenokitWeb.Plugs.EnsureAdmin do
   use NenokitWeb, :controller
   import Plug.Conn
 
-  alias NenokitWeb.Authentication
-  
   def init(options) do
     options
   end
