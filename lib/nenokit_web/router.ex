@@ -145,9 +145,25 @@ defmodule NenokitWeb.Router do
   scope "/admin/surveys", NenokitWeb do
     pipe_through [:browser, :settings, :require_authenticated_user, :admin, :manage_surveys]
 
-    # Blogs management
+    # Surveys management
     resources "/", AdminSurveyController
     get "/:id/show-submission/:submission_id", AdminSurveyController, :show_submission
+  end
+
+  # Admin: Manage survey workflows
+  scope "/admin/workflows", NenokitWeb do
+    pipe_through [:browser, :settings, :require_authenticated_user, :admin, :manage_surveys]
+
+    # Workflows management
+    resources "/", AdminSurveyWorkflowController
+  end
+
+  # Admin: Manage survey workflow stages
+  scope "/admin/workflows/:workflow_id/stages", NenokitWeb do
+    pipe_through [:browser, :settings, :require_authenticated_user, :admin, :manage_surveys]
+
+    # Workflows management
+    resources "/", AdminSurveyWorkflowStageController
   end
 
   # Admin: Manage users

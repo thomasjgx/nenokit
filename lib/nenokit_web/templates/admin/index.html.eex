@@ -18,7 +18,7 @@
         <div class="card-body card-body pb-0 d-flex justify-content-between align-items-start">
             <div>
                 <div class="text-value-lg">0</div>
-                <div>Comments</div>
+                <div>Survey submissions</div>
             </div>
         </div>
         <div class="c-chart-wrapper mt-3 mx-3" style="height:10px;"></div>
@@ -29,7 +29,7 @@
         <div class="card-body card-body pb-0 d-flex justify-content-between align-items-start">
             <div>
                 <div class="text-value-lg"><%= @users %></div>
-                <div>Users</div>
+                <div>Registered users</div>
             </div>
         </div>
         <div class="c-chart-wrapper mt-3 mx-3" style="height:10px;"></div>
@@ -41,7 +41,7 @@
         <div class="card-body card-body pb-0 d-flex justify-content-between align-items-start">
             <div>
                 <div class="text-value-lg"><%= @blogs %></div>
-                <div>Blogs</div>
+                <div>Blog posts</div>
             </div>
         </div>
         <div class="c-chart-wrapper mt-3 mx-3" style="height:10px;"></div>

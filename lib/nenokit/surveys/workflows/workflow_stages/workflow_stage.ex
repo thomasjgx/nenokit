@@ -4,7 +4,7 @@ defmodule Nenokit.Surveys.WorkflowStage do
 
   alias Nenokit.Surveys.Workflow
 
-  schema "workflows" do
+  schema "workflow_stages" do
     field :name, :string
     field :description, :string
     field :settings, :map

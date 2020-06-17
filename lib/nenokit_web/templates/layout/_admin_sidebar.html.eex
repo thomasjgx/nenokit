@@ -1,7 +1,11 @@
 <div class="c-sidebar c-sidebar-dark c-sidebar-fixed c-sidebar-lg-show" id="sidebar">
   <div class="c-sidebar-brand d-lg-down-none">
-    <img class="c-sidebar-brand-full" src="/images/logo_white.png" height="46" alt="Nenokit" />
-    <img class="c-sidebar-brand-minimized mt-2" src="/images/logo_mini_white.png" height="46" alt="Nenokit" />
+    <%= unless is_nil(assigns.settings.appearance.logo) do %>
+        <img src="<%= get_logo(assigns.settings) %>" alt="Brand Logo" class="c-sidebar-brand-full" style="height: 46px;">
+      <% else %>
+        <img src="/images/logo_white.png" alt="Brand Logo" class="c-sidebar-brand-full" style="height: 46px;">
+      <% end %>
+      <img class="c-sidebar-brand-minimized mt-2" src="/images/logo_mini_white.png" height="46" alt="Nenokit" />
   </div>
   <ul class="c-sidebar-nav">
     <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="<%= Routes.admin_path(@conn, :index) %>">
@@ -14,7 +18,7 @@
     <li class="c-sidebar-nav-title">Data</li>
     <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="<%= Routes.admin_survey_path(@conn, :index) %>">
       <i class="c-sidebar-nav-icon cil-pencil"></i> Surveys</a></li>
-      <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="#">
+      <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="<%= Routes.admin_survey_workflow_path(@conn, :index) %>">
       <i class="c-sidebar-nav-icon cil-pencil"></i> Workflows</a></li>
     <li class="c-sidebar-nav-title">Security</li>
     <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="<%= Routes.admin_user_path(@conn, :index) %>">
