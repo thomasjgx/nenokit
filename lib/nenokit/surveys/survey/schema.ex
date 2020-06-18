@@ -10,6 +10,7 @@ defmodule Nenokit.Surveys.Survey.Schema do
     field :enable_survey_subscription
     field :survey_subscription_medium
     field :survey_subscription_start
+    field :survey_subscription_role
     field :submission_stage
   end
 
@@ -23,6 +24,7 @@ defmodule Nenokit.Surveys.Survey.Schema do
       :enable_survey_subscription,
       :survey_subscription_medium,
       :survey_subscription_start,
+      :survey_subscription_role,
       :submission_stage
     ])
   end

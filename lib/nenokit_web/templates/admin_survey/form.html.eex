@@ -40,6 +40,11 @@
       <%= text_input sf, :survey_subscription_start, class: "form-control" %>
       <%= error_tag sf, :survey_subscription_start %>
     </div>
+    <div class="form-group">
+      <label class="form-label">Role allowed to enroll users for this survey subscription</label> <br>
+      <%= select sf, :survey_subscription_role, [{"", ""}] ++ @roles, class: "form-control" %>
+      <%= error_tag sf, :survey_subscription_role %>
+    </div>
   <% end %>
   <%= submit "Save changes", class: "btn btn-primary mb-2 mt-2", id: "submit-form" %>
 <% end %>

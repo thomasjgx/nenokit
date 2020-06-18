@@ -1,7 +1,7 @@
 defmodule NenokitWeb.AdminSurveyController do
   use NenokitWeb, :controller
 
-  alias Nenokit.{Surveys, Surveys.SurveySubmissions, Surveys.Workflows, Surveys.WorkflowStages, AuditTrails}
+  alias Nenokit.{Surveys, Surveys.SurveySubmissions, Surveys.Workflows, Surveys.WorkflowStages, AuditTrails, Roles}
 
   def index(conn, _params) do
     surveys = Surveys.list_surveys
@@ -10,7 +10,8 @@ defmodule NenokitWeb.AdminSurveyController do
 
   def new(conn, _params) do
     changeset = Surveys.change_survey
-    render(conn, "new.html", changeset: changeset, survey: nil, stages: get_stage_options())
+    roles = Roles.list_roles |> Enum.map(fn role -> {role.name, role.id} end)
+    render(conn, "new.html", changeset: changeset, survey: nil, stages: get_stage_options(), roles: roles)
   end
 
   def create(conn, %{"survey" => params}) do
@@ -24,7 +25,8 @@ defmodule NenokitWeb.AdminSurveyController do
         |> put_flash(:success, "Survey created successfully")
         |> redirect(to: Routes.admin_survey_path(conn, :show, survey))
       {:error, changeset} ->
-        render(conn, "new.html", changeset: changeset, survey: nil, stages: get_stage_options())
+        roles = Roles.list_roles |> Enum.map(fn role -> {role.name, role.id} end)
+        render(conn, "new.html", changeset: changeset, survey: nil, stages: get_stage_options(), roles: roles)
     end
   end
 
@@ -43,7 +45,8 @@ defmodule NenokitWeb.AdminSurveyController do
   def edit(conn, %{"id" => survey_id}) do
     survey = Surveys.get_survey(survey_id)
     changeset = Surveys.change_survey(survey)
-    render(conn, "edit.html", survey: survey, changeset: changeset, stages: get_stage_options())
+    roles = Roles.list_roles |> Enum.map(fn role -> {role.name, role.id} end)
+    render(conn, "edit.html", survey: survey, changeset: changeset, stages: get_stage_options(), roles: roles)
   end
 
   def update(conn, %{"id" => survey_id, "survey" => survey_params}) do
@@ -59,7 +62,8 @@ defmodule NenokitWeb.AdminSurveyController do
         |> redirect(to: Routes.admin_survey_path(conn, :show, survey))
 
       {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "edit.html", survey: survey, changeset: changeset, stages: get_stage_options())
+        roles = Roles.list_roles |> Enum.map(fn role -> {role.name, role.id} end)
+        render(conn, "edit.html", survey: survey, changeset: changeset, stages: get_stage_options(), roles: roles)
     end
   end
 
