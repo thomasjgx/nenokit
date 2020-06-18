@@ -19,5 +19,10 @@
     <%= multiple_select f, :users, @users, selected: @selected_users, class: "form-control" %>
     <%= error_tag f, :users %>
   </div>
+  <div class="form-group">
+    <label class="form-label">Workflows</label>
+    <%= multiple_select f, :workflows, @workflow_options, selected: @selected_workflows, class: "form-control" %>
+    <%= error_tag f, :workflows %>
+  </div>
   <%= submit "Save changes", class: "btn btn-primary mb-2 mt-2" %>
 <% end %>

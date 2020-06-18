@@ -7,7 +7,8 @@ defmodule NenokitWeb.WorkflowController do
     workflow = Workflows.get_workflow(workflow_id)
     submissions = SurveySubmissions.list_survey_submissions_by_workflow(workflow.id)
     stages = WorkflowStages.list_workflow_stages(workflow_id)
-    render(conn, "show.html", workflow: workflow, submissions: submissions, stages: stages)
+    survey = Surveys.get_survey(workflow.settings.survey_id)
+    render(conn, "show.html", workflow: workflow, submissions: submissions, stages: stages, survey: survey)
   end
 
   def filter(conn, %{"stage_id" => stage_id}) do
@@ -15,7 +16,8 @@ defmodule NenokitWeb.WorkflowController do
     workflow = Workflows.get_workflow(stage.workflow_id)
     submissions = SurveySubmissions.list_survey_submissions_by_stage(stage_id)
     stages = WorkflowStages.list_workflow_stages(workflow.id)
-    render(conn, "show.html", workflow: workflow, submissions: submissions, stages: stages)
+    survey = Surveys.get_survey(workflow.settings.survey_id)
+    render(conn, "show.html", workflow: workflow, submissions: submissions, stages: stages, survey: survey)
   end
 
   def submission(conn, %{"submission_id" => submission_id}) do

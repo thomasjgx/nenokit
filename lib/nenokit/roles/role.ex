@@ -2,13 +2,14 @@ defmodule Nenokit.Roles.Role do
   use Ecto.Schema
   import Ecto.Changeset
 
-  alias Nenokit.Roles.{RolePermission, RoleUser}
+  alias Nenokit.Roles.{RolePermission, RoleUser, RoleWorkflow}
 
   schema "roles" do
     field :name, :string
     field :description, :string
 
     has_many :role_users, RoleUser
+    has_many :role_workflows, RoleWorkflow
     has_many :role_permissions, RolePermission
 
     timestamps()

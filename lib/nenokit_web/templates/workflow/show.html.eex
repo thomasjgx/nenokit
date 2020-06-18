@@ -14,9 +14,15 @@
     <table class="table table-responsive-sm">
       <thead>
         <tr>
-          <th width="20%">Date</th>
-          <th width="20%">Submitted by</th>
-          <th width="40%">Stage</th>
+          <th width="10%">Time</th>
+          <th>Submitted by</th>
+          <th>Stage</th>
+          <%
+            fields = Poison.decode!(@survey.schema.form_data)
+          %>
+          <%= for field <- fields do %>
+          <th><%= field["label"] %></th>
+          <% end %>
           <th></th>
         </tr>
       </thead>
@@ -25,7 +31,12 @@
         <tr>
           <td><%= get_days_ago(submission.inserted_at) %></td>
           <td><%= if submission.user_id, do: submission.user.name %></td>
-          <td><%= submission.workflow_stage.name %></td>
+          <%
+            fields = Poison.decode!(@survey.schema.form_data)
+          %>
+          <%= for field <- fields do %>
+          <td><%= submission.schema["form_data"][field["name"]] %></td>
+          <% end %>
           <td>
             <a href="<%= Routes.workflow_path(@conn, :submission, submission) %>" class="btn btn-primary btn-sm">View</a>
           </td>

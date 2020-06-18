@@ -1,7 +1,7 @@
 defmodule NenokitWeb.AdminRoleController do
   use NenokitWeb, :controller
 
-  alias Nenokit.{Roles, Roles.Permission, Accounts, AuditTrails}
+  alias Nenokit.{Roles, Roles.Permission, Accounts, AuditTrails, Surveys.Workflows}
 
   def index(conn, _params) do
     roles = Roles.list_roles
@@ -11,10 +11,12 @@ defmodule NenokitWeb.AdminRoleController do
   def new(conn, _params) do
     changeset = Roles.change_role
     selected_users = []
+    selected_workflows = []
     selected_permissions = []
     users = Accounts.list_users |> Enum.map(fn user -> {user.name, user.id} end)
     permissions = Permission.get_permissions
-    render(conn, "new.html", changeset: changeset, selected_users: selected_users, selected_permissions: selected_permissions, users: users, permissions: permissions)
+    workflow_options = Workflows.list_workflows |> Enum.map(fn workflow -> {workflow.name, workflow.id} end)
+    render(conn, "new.html", changeset: changeset, selected_users: selected_users, selected_workflows: selected_workflows, selected_permissions: selected_permissions, users: users, permissions: permissions, workflow_options: workflow_options)
   end
 
   def create(conn, %{"role" => params}) do
@@ -29,10 +31,12 @@ defmodule NenokitWeb.AdminRoleController do
         |> redirect(to: Routes.admin_role_path(conn, :index))
       {:error, changeset} ->
         selected_users = []
+        selected_workflows = []
         selected_permissions = []
         users = Accounts.list_users |> Enum.map(fn user -> {user.name, user.id} end)
         permissions = Permission.get_permissions
-        render(conn, "new.html", changeset: changeset, selected_users: selected_users, selected_permissions: selected_permissions, users: users, permissions: permissions)
+        workflow_options = Workflows.list_workflows |> Enum.map(fn workflow -> {workflow.name, workflow.id} end)
+        render(conn, "new.html", changeset: changeset, selected_users: selected_users, selected_workflows: selected_workflows, selected_permissions: selected_permissions, users: users, permissions: permissions, workflow_options: workflow_options)
     end
   end
 
@@ -40,10 +44,12 @@ defmodule NenokitWeb.AdminRoleController do
     role = Roles.get_role(role_id)
     changeset = Roles.change_role(role)
     selected_users = role.role_users |> Enum.map(fn role_user -> role_user.user_id  end)
+    selected_workflows = role.role_workflows |> Enum.map(fn role_workflow -> role_workflow.workflow_id  end)
     selected_permissions = role.role_permissions |> Enum.map(fn role_permission -> role_permission.slug end)
     users = Accounts.list_users |> Enum.map(fn user -> {user.name, user.id} end)
     permissions = Permission.get_permissions
-    render(conn, "edit.html", role: role, changeset: changeset, selected_users: selected_users, selected_permissions: selected_permissions, users: users, permissions: permissions)
+    workflow_options = Workflows.list_workflows |> Enum.map(fn workflow -> {workflow.name, workflow.id} end)
+    render(conn, "edit.html", role: role, changeset: changeset, selected_users: selected_users, selected_workflows: selected_workflows, selected_permissions: selected_permissions, users: users, permissions: permissions, workflow_options: workflow_options)
   end
 
   def update(conn, %{"id" => role_id, "role" => role_params}) do
@@ -60,10 +66,12 @@ defmodule NenokitWeb.AdminRoleController do
 
       {:error, %Ecto.Changeset{} = changeset} ->
         selected_users = role.role_users |> Enum.map(fn role_user -> role_user.user_id  end)
+        selected_workflows = role.role_workflows |> Enum.map(fn role_workflow -> role_workflow.workflow_id  end)
         selected_permissions = role.role_permissions |> Enum.map(fn role_permission -> role_permission.slug end)
         users = Accounts.list_users |> Enum.map(fn user -> {user.name, user.id} end)
         permissions = Permission.get_permissions
-        render(conn, "edit.html", role: role, changeset: changeset, selected_users: selected_users, selected_permissions: selected_permissions, users: users, permissions: permissions)
+        workflow_options = Workflows.list_workflows |> Enum.map(fn workflow -> {workflow.name, workflow.id} end)
+        render(conn, "edit.html", role: role, changeset: changeset, selected_users: selected_users, selected_workflows: selected_workflows, selected_permissions: selected_permissions, users: users, permissions: permissions, workflow_options: workflow_options)
     end
   end
 

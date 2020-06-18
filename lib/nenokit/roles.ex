@@ -5,7 +5,7 @@ defmodule Nenokit.Roles do
   import Ecto.Query, only: [from: 2]
 
   alias Nenokit.Repo
-  alias __MODULE__.{Role, RolePermission, RoleUser}
+  alias __MODULE__.{Role, RolePermission, RoleUser, RoleWorkflow}
 
   def list_roles() do
     Repo.all(Role)
@@ -37,6 +37,15 @@ defmodule Nenokit.Roles do
           Enum.each(params["users"], fn user ->
             %RoleUser{}
             |> RoleUser.changeset(%{"role_id" => role.id, "user_id" => user})
+            |> Repo.insert
+          end)
+        end
+
+        # Add role workflows
+        if !is_nil(params["workflows"]) do
+          Enum.each(params["workflows"], fn workflow ->
+            %RoleWorkflow{}
+            |> RoleWorkflow.changeset(%{"role_id" => role.id, "workflow_id" => workflow})
             |> Repo.insert
           end)
         end
@@ -78,6 +87,18 @@ defmodule Nenokit.Roles do
           end)
         end
 
+        # Delete existing role workflows
+        from(ru in RoleWorkflow, where: ru.role_id == ^role.id) |> Repo.delete_all
+        
+        # Add role users
+        if !is_nil(params["workflows"]) do
+          Enum.each(params["workflows"], fn workflow ->
+            %RoleWorkflow{}
+            |> RoleWorkflow.changeset(%{"role_id" => role.id, "workflow_id" => workflow})
+            |> Repo.insert
+          end)
+        end
+
         success
       {:error, _changeset} = error ->
         error
@@ -86,7 +107,7 @@ defmodule Nenokit.Roles do
 
   def get_role(id) do
     Repo.get(Role, id)
-    |> Repo.preload([:role_users, :role_permissions])
+    |> Repo.preload([:role_users, :role_permissions, :role_workflows])
   end
 
   def get_one() do

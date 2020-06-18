@@ -9,5 +9,12 @@
     <%= textarea f, :description, class: "form-control mt-2 mb-3" %>
     <%= error_tag f, :description %>
   </div>
+  <%= inputs_for f, :settings, fn sf -> %>
+    <div class="form-group">
+      <label class="form-label">Survey</label>
+      <%= select sf, :survey_id, [{"",""}] ++ @surveys, class: "form-control" %>
+      <%= error_tag sf, :survey_id %>
+    </div>
+  <% end %>
   <%= submit "Save changes", class: "btn btn-primary mb-2 mt-2" %>
 <% end %>

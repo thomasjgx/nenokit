@@ -4,13 +4,14 @@ defmodule NenokitWeb.Plugs.LoadWorkflows do
   """
 
   import Plug.Conn
-  alias Nenokit.Surveys.Workflows
+  alias Nenokit.{Surveys.Workflows, Roles}
 
   def init(options) do
     options
   end
 
   def call(conn, _options) do
-    assign(conn, :workflows, Workflows.list_workflows)
+    workflows = Workflows.list_workflows_by_user(conn.assigns.current_user.id)
+    assign(conn, :workflows, workflows)
   end
 end

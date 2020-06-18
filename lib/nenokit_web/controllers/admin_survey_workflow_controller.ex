@@ -1,7 +1,7 @@
 defmodule NenokitWeb.AdminSurveyWorkflowController do
   use NenokitWeb, :controller
 
-  alias Nenokit.{Surveys.Workflows, Surveys.WorkflowStages, AuditTrails}
+  alias Nenokit.{Surveys, Surveys.Workflows, Surveys.WorkflowStages, AuditTrails}
 
   def index(conn, _params) do
     workflows = Workflows.list_workflows
@@ -10,7 +10,8 @@ defmodule NenokitWeb.AdminSurveyWorkflowController do
 
   def new(conn, _params) do
     changeset = Workflows.change_workflow
-    render(conn, "new.html", changeset: changeset, workflow: nil)
+    surveys = Surveys.list_surveys |> Enum.map(fn survey -> {survey.name, survey.id} end)
+    render(conn, "new.html", changeset: changeset, workflow: nil, surveys: surveys)
   end
 
   def create(conn, %{"workflow" => params}) do
@@ -24,7 +25,8 @@ defmodule NenokitWeb.AdminSurveyWorkflowController do
         |> put_flash(:success, "Workflow created successfully")
         |> redirect(to: Routes.admin_survey_workflow_path(conn, :show, workflow))
       {:error, changeset} ->
-        render(conn, "new.html", changeset: changeset, workflow: nil)
+        surveys = Surveys.list_surveys |> Enum.map(fn survey -> {survey.name, survey.id} end)
+        render(conn, "new.html", changeset: changeset, workflow: nil, surveys: surveys)
     end
   end
 
@@ -37,7 +39,8 @@ defmodule NenokitWeb.AdminSurveyWorkflowController do
   def edit(conn, %{"id" => workflow_id}) do
     workflow = Workflows.get_workflow(workflow_id)
     changeset = Workflows.change_workflow(workflow)
-    render(conn, "edit.html", workflow: workflow, changeset: changeset)
+    surveys = Surveys.list_surveys |> Enum.map(fn survey -> {survey.name, survey.id} end)
+    render(conn, "edit.html", workflow: workflow, changeset: changeset, surveys: surveys)
   end
 
   def update(conn, %{"id" => workflow_id, "workflow" => workflow_params}) do
@@ -53,7 +56,8 @@ defmodule NenokitWeb.AdminSurveyWorkflowController do
         |> redirect(to: Routes.admin_survey_workflow_path(conn, :show, workflow))
 
       {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "edit.html", workflow: workflow, changeset: changeset)
+        surveys = Surveys.list_surveys |> Enum.map(fn survey -> {survey.name, survey.id} end)
+        render(conn, "edit.html", workflow: workflow, changeset: changeset, surveys: surveys)
     end
   end
 
