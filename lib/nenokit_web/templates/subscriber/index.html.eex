@@ -1,0 +1,39 @@
+<div class="card">
+  <div class="card-header">Subscribers</div>
+  <div class="card-datatable table-response p-3">
+    <div class="row align-items-center mr-3">
+      <div class="col-sm-12">
+        <a class="btn btn-primary float-right mb-3" href="<%= Routes.subscriber_path(@conn, :new) %>">New Subscriber</a>
+      </div>
+    </div>
+    <table class="datatables-simple table table-striped table bordered">
+      <thead>
+        <tr>
+          <th width="5%">#</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Phone</th>
+          <th>Survey</th>
+          <th>Created on</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+      <%= for subscriber <- @subscribers do %>
+        <tr>
+          <td><%= subscriber.id %></td>
+          <td><%= subscriber.user.name %></td>
+          <td><%= subscriber.user.email %></td>
+          <td><%= subscriber.user.phone %></td>
+          <td><%= subscriber.survey.name %></td>
+          <td><%= subscriber.inserted_at %></td>
+          <td>
+            <%= link "Show", to: Routes.subscriber_path(@conn, :show, subscriber), class: "btn btn-primary btn-sm mr-2"%>
+            <%= link "Delete", to: Routes.subscriber_path(@conn, :delete, subscriber), method: :delete, class: "btn btn-danger btn-sm" %>
+          </td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -4,7 +4,7 @@ defmodule Nenokit.Surveys.SurveySubscriber do
 
   alias Nenokit.{Accounts.User, Surveys.Survey, Surveys.SurveySubmission}
 
-  schema "survey_subscriber" do
+  schema "survey_subscribers" do
     field :subscription_notes, :string
     field :sent, :boolean, default: false
     field :submitted, :boolean, default: false

@@ -11,8 +11,7 @@ defmodule Nenokit.Roles.Permission do
       "manage_users",
       "manage_roles",
       "manage_settings",
-      "manage_areas",
-      "manage_campaigns"
+      "manage_subscribers"
     ]
   end
 end

@@ -75,6 +75,7 @@ defmodule NenokitWeb.Router do
     get "/page/:id", PageController, :page
     get "/blog/:id", PageController, :blog
     post "/search", PageController, :search
+    get "/unauthorized", PageController, :unauthorized
 
     get "/survey/:id", SurveyController, :view
     post "/survey/:id", SurveyController, :submit
@@ -124,6 +125,9 @@ defmodule NenokitWeb.Router do
     get "/workflow/filter/:stage_id", WorkflowController, :filter
     get "/workflow/submission/:submission_id", WorkflowController, :submission
     get "/workflow/move_submission/:submission_id/:stage_id", WorkflowController, :move_submission
+
+    # Subscribers management
+    resources "/subscribers", SubscriberController
   end
 
   # Admin: Manage pages

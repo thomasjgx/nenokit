@@ -41,4 +41,8 @@ defmodule NenokitWeb.PageController do
     settings = conn.assigns.settings
     render(conn, "privacy_policy.html", content: settings.configuration.privacy_policy)
   end
+
+  def unauthorized(conn, _params) do
+    render(conn, "unauthorized.html")
+  end
 end

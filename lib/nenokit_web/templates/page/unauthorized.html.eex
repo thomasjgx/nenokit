@@ -1,0 +1,9 @@
+<div class="card text-center mt-4 p-5">
+  <div class="card-body">
+    <h4 class="card-title">Unauthorized Access</h4>
+    <p class="card-text">You don't have permission to access this resource</p>
+    <p class="card-text">
+      <small class="text-muted">Contact your system administrator for assistance</small>
+    </p>
+  </div>
+</div>

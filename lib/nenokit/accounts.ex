@@ -28,6 +28,22 @@ defmodule Nenokit.Accounts do
   end
 
   @doc """
+  Gets a user by email or phone.
+
+  ## Examples
+
+      iex> get_user_by_email_or_phone("foo@example.com", "25471233443423")
+      %User{}
+
+      iex> get_user_by_email_or_phone("unknown@example.com", "0")
+      nil
+
+  """
+  def get_user_by_email_or_phone(email, phone) when is_binary(email) do
+    Repo.one(from u in User, select: u, where: u.email == ^email or u.phone == ^phone)
+  end
+
+  @doc """
   Gets a user by email and password.
 
   ## Examples

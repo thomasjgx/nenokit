@@ -7,8 +7,14 @@ defmodule Nenokit.Surveys.SurveySubscribers do
   alias Nenokit.Repo
   alias Nenokit.Surveys.SurveySubscriber
 
+  def list_survey_subscribers() do
+    Repo.all(from s in SurveySubscriber, select: s, order_by: [asc: :id])
+    |> Repo.preload([:user, :survey])
+  end
+
   def list_survey_subscribers_by_survey(survey_id) do
     Repo.all(from s in SurveySubscriber, select: s, where: s.survey_id == ^survey_id, order_by: [asc: :id])
+    |> Repo.preload([:user, :survey])
   end
 
   def change_survey_subscriber(survey_subscriber \\ %SurveySubscriber{}) do
@@ -29,6 +35,7 @@ defmodule Nenokit.Surveys.SurveySubscribers do
 
   def get_survey_subscriber(id) do
     Repo.get(SurveySubscriber, id)
+    |> Repo.preload([:user, :survey])
   end
 
   def delete_survey_subscriber(survey_subscriber) do

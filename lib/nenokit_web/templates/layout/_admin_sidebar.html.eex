@@ -14,24 +14,44 @@
     <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="<%= Routes.workflow_path(@conn, :show, workflow) %>">
       <i class="c-sidebar-nav-icon cil-applications"></i> <%= workflow.name %></a></li>
     <% end %>
+    <%= if has_permission(@conn, "manage_subscribers") do %>
+    <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="<%= Routes.subscriber_path(@conn, :index) %>">
+      <i class="c-sidebar-nav-icon cil-user-follow"></i> Subscribers</a></li>
+    <% end %>
+    <%= if has_permission(@conn, "manage_pages") or has_permission(@conn, "manage_blogs") do %>
     <li class="c-sidebar-nav-title">Content</li>
-    <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="<%= Routes.admin_page_path(@conn, :index) %>">
-      <i class="c-sidebar-nav-icon cil-paragraph"></i> Pages</a></li>
-    <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="<%= Routes.admin_blog_path(@conn, :index) %>">
-      <i class="c-sidebar-nav-icon cil-paperclip"></i> Blogs</a></li>
+      <%= if has_permission(@conn, "manage_pages") do %>
+      <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="<%= Routes.admin_page_path(@conn, :index) %>">
+        <i class="c-sidebar-nav-icon cil-paragraph"></i> Pages</a></li>
+      <% end%>
+      <%= if has_permission(@conn, "manage_blogs") do %>
+      <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="<%= Routes.admin_blog_path(@conn, :index) %>">
+        <i class="c-sidebar-nav-icon cil-paperclip"></i> Blogs</a></li>
+      <% end%>
+    <%end %>
+    <%= if has_permission(@conn, "manage_surveys") do %>
     <li class="c-sidebar-nav-title">Data</li>
     <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="<%= Routes.admin_survey_path(@conn, :index) %>">
       <i class="c-sidebar-nav-icon cil-task"></i> Surveys</a></li>
       <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="<%= Routes.admin_survey_workflow_path(@conn, :index) %>">
       <i class="c-sidebar-nav-icon cil-grid"></i> Workflows</a></li>
+    <% end %>
+    <%= if has_permission(@conn, "manage_users") or has_permission(@conn, "manage_roles") do %>
     <li class="c-sidebar-nav-title">Security</li>
-    <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="<%= Routes.admin_user_path(@conn, :index) %>">
-      <i class="c-sidebar-nav-icon cil-user"></i> Users</a></li>
-    <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="<%= Routes.admin_role_path(@conn, :index) %>">
-      <i class="c-sidebar-nav-icon cil-people"></i> Roles</a></li>
+       <%= if has_permission(@conn, "manage_users") do %>
+      <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="<%= Routes.admin_user_path(@conn, :index) %>">
+        <i class="c-sidebar-nav-icon cil-user"></i> Users</a></li>
+      <% end %>
+       <%= if has_permission(@conn, "manage_roles") do %>
+      <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="<%= Routes.admin_role_path(@conn, :index) %>">
+        <i class="c-sidebar-nav-icon cil-people"></i> Roles</a></li>
+      <% end %>
+    <% end %>
+    <%= if has_permission(@conn, "manage_settings") do %>
     <li class="c-sidebar-nav-title">Site</li>
     <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="<%= Routes.settings_path(@conn, :edit) %>">
       <i class="c-sidebar-nav-icon cil-settings"></i> Settings</a></li>
+    <% end %>
   </ul>
   <button class="c-sidebar-minimizer c-class-toggler" type="button" data-target="_parent" data-class="c-sidebar-minimized"></button>
 </div>

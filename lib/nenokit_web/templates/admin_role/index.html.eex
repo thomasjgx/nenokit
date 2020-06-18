@@ -20,7 +20,6 @@
           <td><%= role.id %></td>
           <td><%= role.name %></td>
           <td>
-            <%= link "Show", to: Routes.admin_role_path(@conn, :show, role), class: "btn btn-info btn-sm mr-2" %>
             <%= link "Edit", to: Routes.admin_role_path(@conn, :edit, role), class: "btn btn-primary btn-sm mr-2"%>
             <%= link "Delete", to: Routes.admin_role_path(@conn, :delete, role), method: :delete, class: "btn btn-danger btn-sm" %>
           </td>

@@ -16,7 +16,7 @@
         <tr>
           <th width="10%">Time</th>
           <th>Submitted by</th>
-          <th>Stage</th>
+          <th>Status</th>
           <%
             fields = Poison.decode!(@survey.schema.form_data)
           %>

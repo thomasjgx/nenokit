@@ -9,4 +9,8 @@ defmodule NenokitWeb.LayoutView do
     image = Nenokit.SettingsFile.urls({settings.appearance.logo, settings})
     image.original
   end
+
+  def has_permission(conn, permission) do
+    Enum.member?(conn.assigns.permissions, permission)
+  end
 end

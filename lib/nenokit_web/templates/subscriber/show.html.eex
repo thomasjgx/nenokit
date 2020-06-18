@@ -1,0 +1,32 @@
+<div class="card">
+  <div class="card-header">Show Subscriber</div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col">
+        <h4 class="font-weight-bold mb-4"><%= @subscriber.user.name %></h4>
+        <div class="text-muted mb-4">
+          Subscribed <%= get_days_ago(@subscriber.inserted_at) %>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="card-body">
+          <table class="datatables-simple table table-striped table bordered">
+            <thead>
+              <tr>
+                <th width="10%">Time</th>
+                <th>Survey</th>
+                <th width="70%">Status</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+            
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

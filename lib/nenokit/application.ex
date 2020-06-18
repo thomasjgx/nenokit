@@ -17,6 +17,7 @@ defmodule Nenokit.Application do
       NenokitWeb.Endpoint
       # Start a worker by calling: Nenokit.Worker.start_link(arg)
       # {Nenokit.Worker, arg}
+      Nenokit.Surveys.SurveySubscribers.Processor
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

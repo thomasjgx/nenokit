@@ -1,0 +1,28 @@
+<%= form_for @changeset, @action, [], fn f -> %>
+  <div class="form-group">
+    <label class="form-label">Survey</label>
+    <%= select f, :survey_id, @surveys, class: "form-control" %>
+    <%= error_tag f, :survey_id %>
+  </div>
+  <div class="form-group">
+    <label class="form-label">Name</label>
+    <%= text_input f, :name, class: "form-control" %>
+    <%= error_tag f, :name %>
+  </div>
+  <div class="form-group">
+    <label class="form-label">Email</label>
+    <%= text_input f, :email, class: "form-control" %>
+    <%= error_tag f, :email %>
+  </div>
+  <div class="form-group">
+    <label class="form-label">Phone</label>
+    <%= text_input f, :phone, class: "form-control" %>
+    <%= error_tag f, :phone %>
+  </div>
+  <div class="form-group">
+    <label class="form-label">Notes</label>
+    <%= textarea f, :subscription_notes, class: "form-control mt-2 mb-3" %>
+    <%= error_tag f, :subscription_notes %>
+  </div>
+  <%= submit "Save changes", class: "btn btn-primary mb-2 mt-2" %>
+<% end %>
