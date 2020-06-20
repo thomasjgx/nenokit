@@ -30,6 +30,7 @@
         <%= for submission <- @submissions do %>
         <tr>
           <td><%= get_days_ago(submission.inserted_at) %></td>
+          <td><%= submission.workflow_stage.name %></td>
           <td><%= if submission.user_id, do: submission.user.name %></td>
           <%
             fields = Poison.decode!(@survey.schema.form_data)
