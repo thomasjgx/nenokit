@@ -1,0 +1,4 @@
+Hi <%= assigns.subscriber.user.name %>,
+
+Please fill out the following survey:
+http://localhost:4000/survey/<%= assigns.subscriber.survey.id %>

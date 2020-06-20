@@ -5,7 +5,7 @@ defmodule Nenokit.Surveys.SurveySubscribers do
   import Ecto.Query, only: [from: 2]
 
   alias Nenokit.Repo
-  alias Nenokit.Surveys.SurveySubscriber
+  alias Nenokit.{Surveys, Surveys.SurveySubscriber}
 
   def list_survey_subscribers() do
     Repo.all(from s in SurveySubscriber, select: s, order_by: [asc: :id])
@@ -17,13 +17,23 @@ defmodule Nenokit.Surveys.SurveySubscribers do
     |> Repo.preload([:user, :survey])
   end
 
+  def fetch_survey_subscribers_to_notify(survey) do
+    Repo.all(from s in SurveySubscriber, select: s, where: s.survey_id == ^survey.id and s.sent == false and s.due_date < from_now(0, "day"), order_by: [asc: :id])
+    |> Repo.preload([:user, :survey])
+  end
+
   def change_survey_subscriber(survey_subscriber \\ %SurveySubscriber{}) do
     SurveySubscriber.changeset(survey_subscriber, %{})
   end
 
   def create_survey_subscriber(params) do
+    survey = Surveys.get_survey(params["survey_id"])
+    {days_due, _} = Integer.parse(survey.schema.survey_subscription_start)
+    due_date = Timex.to_naive_datetime(Timex.shift(Timex.now, days: days_due))
+
+    params_with_due_date = params |> Map.put("due_date", due_date)
     %SurveySubscriber{}
-    |> SurveySubscriber.changeset(params)
+    |> SurveySubscriber.changeset(params_with_due_date)
     |> Repo.insert
   end
 

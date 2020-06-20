@@ -1,0 +1,4 @@
+import Config
+
+config :nenokit, Nenokit.SMS,
+  adapter: Nenokit.SMS.LogAdapter

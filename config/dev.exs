@@ -78,3 +78,6 @@ config :phoenix, :plug_init_mode, :runtime
 # Bamboo Emailer
 config :nenokit, NenokitWeb.Mailer,
   adapter: Bamboo.LocalAdapter
+
+# Finally import the config/dev.local.exs which should NOT be versioned
+import_config "dev.local.exs"

@@ -10,6 +10,10 @@ defmodule Nenokit.Surveys do
   def list_surveys() do
     Repo.all(from s in Survey, select: s, order_by: [asc: :id])
   end
+  
+  def list_surveys_with_subscription_enabled() do
+    Repo.all(from s in Survey, select: s, where: fragment("schema->'enable_survey_subscription' is not null"), where: fragment(~s|schema @> '{"enable_survey_subscription": "yes"}'|), order_by: [asc: :id])
+  end
 
   def change_survey(survey \\ %Survey{}) do
     Survey.changeset(survey, %{})

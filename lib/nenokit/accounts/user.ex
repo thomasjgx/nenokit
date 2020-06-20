@@ -44,6 +44,7 @@ defmodule Nenokit.Accounts.User do
     |> cast(attrs, [:name, :email, :phone, :password, :extra_fields])
     |> validate_required([:name])
     |> validate_email()
+    |> validate_phone()
     |> validate_password()
   end
 
@@ -54,6 +55,15 @@ defmodule Nenokit.Accounts.User do
     |> validate_length(:email, max: 160)
     |> unsafe_validate_unique(:email, Nenokit.Repo)
     |> unique_constraint(:email)
+  end
+
+  defp validate_phone(changeset) do
+    changeset
+    |> validate_format(:phone, ~r/(9[976]\d|8[987530]\d|6[987]\d|5[90]\d|42\d|3[875]\d|
+    2[98654321]\d|9[8543210]|8[6421]|6[6543210]|5[87654321]|
+    4[987654310]|3[9643210]|2[70]|7|1)\d{1,14}$/, message: "invalid phone number format (Start with country code e.g. 254....)")
+    |> unsafe_validate_unique(:phone, Nenokit.Repo)
+    |> unique_constraint(:phone)
   end
 
   defp validate_password(changeset) do

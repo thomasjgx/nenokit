@@ -53,7 +53,9 @@ defmodule Nenokit.MixProject do
       {:timex, "~> 3.5"},
       {:poison, "~> 2.2"},
       {:slugger, "~> 0.3.0"},
-      {:scrivener_ecto, "~> 2.0"}
+      {:scrivener_ecto, "~> 2.0"},
+      {:httpotion, "~> 3.1.3"},
+      {:httpoison, "~> 1.5"}
     ]
   end
 

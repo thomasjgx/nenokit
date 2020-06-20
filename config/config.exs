@@ -30,6 +30,16 @@ config :phoenix, :json_library, Jason
 config :arc,
   storage: Arc.Storage.Local
 
+# SMS
+config :nenokit, Nenokit.SMS, adapter: SMS.LogAdapter
+
+# HTTPClient
+config :nenokit, Nenokit.HTTPClient,
+  adapter: HTTPoison,
+  adapter_options: [
+    recv_timeout: 30_000
+  ]
+
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env()}.exs"

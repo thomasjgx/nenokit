@@ -15,6 +15,7 @@
           <th>Phone</th>
           <th>Survey</th>
           <th>Created on</th>
+          <th>Due date</th>
           <th></th>
         </tr>
       </thead>
@@ -27,6 +28,7 @@
           <td><%= subscriber.user.phone %></td>
           <td><%= subscriber.survey.name %></td>
           <td><%= subscriber.inserted_at %></td>
+          <td><%= subscriber.due_date %></td>
           <td>
             <%= link "Show", to: Routes.subscriber_path(@conn, :show, subscriber), class: "btn btn-primary btn-sm mr-2"%>
             <%= link "Delete", to: Routes.subscriber_path(@conn, :delete, subscriber), method: :delete, class: "btn btn-danger btn-sm" %>

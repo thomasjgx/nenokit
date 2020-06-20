@@ -14,10 +14,10 @@ defmodule Nenokit.Application do
       # Start the PubSub system
       {Phoenix.PubSub, name: Nenokit.PubSub},
       # Start the Endpoint (http/https)
-      NenokitWeb.Endpoint
+      NenokitWeb.Endpoint,
       # Start a worker by calling: Nenokit.Worker.start_link(arg)
       # {Nenokit.Worker, arg}
-      Nenokit.Surveys.SurveySubscribers.Processor
+      Nenokit.Surveys.SurveySubscribers.SendSubscriberSurveys
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
