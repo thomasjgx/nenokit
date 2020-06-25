@@ -7,7 +7,7 @@
     </div>
     <div class="row">
       <div class="col">
-        <%= form_for @conn, Routes.survey_path(@conn, :submit, @survey), [], fn _f -> %>
+        <%= form_for @conn, "#{Routes.survey_path(@conn, :submit, @survey)}?data=#{@data}", [], fn _f -> %>
           <div class="text-muted mb-4 ml-3 mt-3 mr-3" id="fb-render"></div>
           <%= submit "Submit", class: "btn btn-primary mb-2 mt-2", id: "submit-form" %>
         <% end %>

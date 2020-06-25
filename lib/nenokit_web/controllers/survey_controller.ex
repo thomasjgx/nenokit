@@ -3,19 +3,21 @@ defmodule NenokitWeb.SurveyController do
 
   alias Nenokit.{Surveys, Surveys.SurveySubmissions}
 
-  def view(conn, %{"id" => survey_id}) do
+  def view(conn, %{"id" => survey_id, "data" => data}) do
     survey = Surveys.get_survey(survey_id)
-    render(conn, "form.html", survey: survey)
+    render(conn, "form.html", survey: survey, data: data)
   end
 
   def submit(conn, params) do
     survey = Surveys.get_survey(params["id"])
     user_id =
-      case conn.assigns.current_user do
+      case params["data"] do
         nil ->
           nil
-        user ->
-          user.id
+        data ->
+          user_id = Base.decode64!(data)
+          IO.inspect user_id
+          user_id
       end
 
     workflow_stage_id =
@@ -36,7 +38,7 @@ defmodule NenokitWeb.SurveyController do
       {:ok, _survey_submission} ->
         render(conn, "submitted.html", survey: survey)
       {:error, changeset} ->
-        render(conn, "form.html", survey: survey, changeset: changeset, page: nil)
+        render(conn, "form.html", survey: survey, changeset: changeset, page: nil, data: params["data"])
     end
   end
 
