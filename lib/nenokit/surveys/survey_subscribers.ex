@@ -32,9 +32,24 @@ defmodule Nenokit.Surveys.SurveySubscribers do
     due_date = Timex.to_naive_datetime(Timex.shift(Timex.now, days: days_due))
 
     params_with_due_date = params |> Map.put("due_date", due_date)
-    %SurveySubscriber{}
-    |> SurveySubscriber.changeset(params_with_due_date)
-    |> Repo.insert
+    results = 
+      %SurveySubscriber{}
+      |> SurveySubscriber.changeset(params_with_due_date)
+      |> Repo.insert
+
+    case results do
+      {:ok, subscriber} = success ->
+        subscriber_preloaded = subscriber |> Repo.preload([:user, :survey])
+        case subscriber_preloaded.survey.schema.survey_subscription_medium do
+          "sms" ->
+            NenokitWeb.SMS.send_survey_subscription_welcome(subscriber_preloaded)
+          "email" ->
+            NenokitWeb.Email.send_survey_subscription_welcome(subscriber_preloaded)
+        end
+        success
+      {:error, _changeset} = error ->
+        error
+    end 
   end
 
   def update_survey_subscriber(survey_subscriber, params) do

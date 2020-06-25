@@ -1,0 +1,3 @@
+Hi <%= assigns.subscriber.user.name %>,
+
+You have been successfully signup for the following survey: <%= assigns.subscriber.survey.name %>

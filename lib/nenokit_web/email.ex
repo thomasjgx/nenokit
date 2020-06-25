@@ -40,6 +40,18 @@ defmodule NenokitWeb.Email do
     end
   end
 
+  def send_survey_subscription_welcome(subscriber) do
+    settings = Settings.get_settings
+
+    if !is_nil(settings) do
+      base_email(settings)
+      |> to(subscriber.user.email)
+      |> subject("#{settings.configuration.site_name}: #{subscriber.survey.name}")
+      |> render(:survey_signup, subscriber: subscriber)
+      |> Mailer.deliver_later
+    end
+  end
+  
   defp base_email(settings) do
     new_email()
     |> from(settings.configuration.site_email)
