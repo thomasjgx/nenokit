@@ -16,7 +16,7 @@ defmodule Nenokit.Surveys.SurveySubmission do
   def changeset(struct, params) do
     struct
     |> cast(params, [:user_id, :survey_id, :schema, :workflow_stage_id])
-    |> validate_required([:user_id, :survey_id, :schema])
+    |> validate_required([:survey_id, :schema])
   end
 
 end
