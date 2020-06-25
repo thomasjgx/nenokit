@@ -2,4 +2,4 @@ Hi <%= assigns.subscriber.user.name %>,<br>
 <br>
 Please fill out the following survey:<br><br>
 <h3><%= assigns.subscriber.survey.name %></h3><br>
-<a href="http://localhost:4000/survey/<%= assigns.subscriber.survey.id %>">http://localhost:4000/survey/<%= assigns.subscriber.survey.id %></a>
+<a href="<%= NenokitWeb.Endpoint.url() %>/survey/<%= assigns.subscriber.survey.id %>"><%= NenokitWeb.Endpoint.url() %>/survey/<%= assigns.subscriber.survey.id %></a>
