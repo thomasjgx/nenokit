@@ -20,7 +20,9 @@ defmodule Nenokit.Settings.Configuration do
     field :sso_registration_url
   end
 
-  @doc false
+  @doc """
+  Settings changeset.
+  """
   def changeset(%__MODULE__{} = configuration, attrs) do
     configuration
     |> cast(attrs, [
@@ -39,5 +41,13 @@ defmodule Nenokit.Settings.Configuration do
       :sso_login_url,
       :sso_registration_url
     ])
+    |> validate_site_email()
+  end
+
+  defp validate_site_email(changeset) do
+    changeset
+    |> validate_required([:site_name, :site_description, :site_keywords, :site_email])
+    |> validate_format(:site_email, ~r/^[^\s]+@[^\s]+$/, message: "must have the @ sign and no spaces")
+    |> validate_length(:site_email, max: 160)
   end
 end

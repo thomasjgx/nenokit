@@ -34,3 +34,5 @@ npm-debug.log
 /priv/static/
 
 dev.local.exs
+
+/uploads/
