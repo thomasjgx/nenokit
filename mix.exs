@@ -55,7 +55,8 @@ defmodule Nenokit.MixProject do
       {:slugger, "~> 0.3.0"},
       {:scrivener_ecto, "~> 2.0"},
       {:httpotion, "~> 3.1.3"},
-      {:httpoison, "~> 1.5"}
+      {:httpoison, "~> 1.5"},
+      {:elixlsx, "~> 0.4.2"}
     ]
   end
 

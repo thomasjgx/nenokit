@@ -127,7 +127,9 @@ defmodule NenokitWeb.Router do
 
     # Workflow
     get "/workflow/:id", WorkflowController, :show
+    get "/workflow/export/:id", WorkflowController, :export_show
     get "/workflow/filter/:stage_id", WorkflowController, :filter
+    get "/workflow/export/filter/:stage_id", WorkflowController, :export_filter
     get "/workflow/submission/:submission_id", WorkflowController, :submission
     get "/workflow/move_submission/:submission_id/:stage_id", WorkflowController, :move_submission
 
