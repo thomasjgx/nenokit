@@ -3,20 +3,28 @@ defmodule NenokitWeb.SurveyController do
 
   alias Nenokit.{Surveys, Surveys.SurveySubmissions}
 
+  @spec view(Plug.Conn.t(), map) :: Plug.Conn.t()
   def view(conn, %{"id" => survey_id, "data" => data}) do
     survey = Surveys.get_survey(survey_id)
     render(conn, "form.html", survey: survey, data: data)
   end
 
+  def view(conn, %{"id" => survey_id}) do
+    survey = Surveys.get_survey(survey_id)
+    render(conn, "form.html", survey: survey, data: nil)
+  end
+
+  @spec submit(Plug.Conn.t(), nil | maybe_improper_list | map) :: Plug.Conn.t()
   def submit(conn, params) do
     survey = Surveys.get_survey(params["id"])
     user_id =
       case params["data"] do
         nil ->
-          nil
+          conn.assigns.current_user.id
+        "" ->
+          conn.assigns.current_user.id
         data ->
           user_id = Base.decode64!(data)
-          IO.inspect user_id
           user_id
       end
 

@@ -1,9 +1,7 @@
-<div class="card text-center mt-4 p-5">
-  <div class="card-body">
-    <h4 class="card-title">Welcome to Nenokit!</h4>
-    <p class="card-text">No pages found</p>
-    <p class="card-text">
-      <small class="text-muted">Log in as an admin to create pages</small>
-    </p>
-  </div>
+<div class="jumbotron mt-5">
+  <h1 class="display-3">Welcome to <%= @settings.configuration.site_name %>!</h1>
+  <p class="lead"><%= @settings.configuration.site_description %></p>
+  <hr class="my-4">
+  <p>To remove this welcome message, click the button below, login as an admin and create your first page.</p>
+  <p class="lead"><a class="btn btn-primary btn-lg" href="<%= Routes.admin_page_path(@conn, :new) %>" role="button">Create home page</a></p>
 </div>

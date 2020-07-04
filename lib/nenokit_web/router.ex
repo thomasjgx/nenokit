@@ -41,6 +41,11 @@ defmodule NenokitWeb.Router do
     plug NenokitWeb.Plugs.EnsurePermission, "manage_blogs"
   end
 
+  # Manage media
+  pipeline :manage_media do
+    plug NenokitWeb.Plugs.EnsurePermission, "manage_media"
+  end
+
   # Manage surveys
   pipeline :manage_surveys do
     plug NenokitWeb.Plugs.EnsurePermission, "manage_surveys"
@@ -122,7 +127,9 @@ defmodule NenokitWeb.Router do
 
     # Workflow
     get "/workflow/:id", WorkflowController, :show
+    get "/workflow/export/:id", WorkflowController, :export_show
     get "/workflow/filter/:stage_id", WorkflowController, :filter
+    get "/workflow/export/filter/:stage_id", WorkflowController, :export_filter
     get "/workflow/submission/:submission_id", WorkflowController, :submission
     get "/workflow/move_submission/:submission_id/:stage_id", WorkflowController, :move_submission
 
@@ -150,6 +157,14 @@ defmodule NenokitWeb.Router do
 
     # Blogs management
     resources "/", AdminBlogController
+  end
+
+  # Admin: Manage medias
+  scope "/admin/media", NenokitWeb do
+    pipe_through [:browser, :settings, :require_authenticated_user, :admin, :manage_media]
+
+    # Medias management
+    resources "/", AdminMediaController
   end
 
   # Admin: Manage surveys

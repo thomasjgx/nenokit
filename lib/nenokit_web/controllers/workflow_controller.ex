@@ -11,6 +11,17 @@ defmodule NenokitWeb.WorkflowController do
     render(conn, "show.html", workflow: workflow, submissions: submissions, stages: stages, survey: survey)
   end
 
+  def export_show(conn, %{"id" => workflow_id}) do
+    workflow = Workflows.get_workflow(workflow_id)
+    submissions = SurveySubmissions.list_survey_submissions_by_workflow(workflow.id)
+    survey = Surveys.get_survey(workflow.settings.survey_id)
+
+    conn
+    |> put_resp_content_type("text/xlsx")
+    |> put_resp_header("content-disposition", "attachment; filename=submissions_report.xlsx")
+    |> render("export.xlsx", %{survey: survey, submissions: submissions})
+  end
+
   def filter(conn, %{"stage_id" => stage_id}) do
     stage = WorkflowStages.get_workflow_stage(stage_id)
     workflow = Workflows.get_workflow(stage.workflow_id)
