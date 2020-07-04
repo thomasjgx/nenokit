@@ -94,7 +94,7 @@
             <%= inputs_for f, :appearance, fn af -> %>
               <div class="form-group">
                 <label class="form-label">Logo</label>
-                <%= file_input af, :logo, class: "form-control" %>
+                <%= file_input af, :logo %>
                 <%= error_tag af, :logo %>
               </div>
             <% end %>
