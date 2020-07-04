@@ -23,7 +23,7 @@
           <td><%= media.id %></td>
           <td><%= media.name %></td>
           <td><img src="<%= get_file(media) %>" width="300"></td>
-          <td><%= "#{NenokitWeb.Endpoint.url}#{get_file(media)}" %></td>
+          <td><%= "#{get_file(media)}" %></td>
           <td><%= media.inserted_at %></td>
           <td>
             <%= link "Edit", to: Routes.admin_media_path(@conn, :edit, media), class: "btn btn-primary btn-sm mr-2"%>
