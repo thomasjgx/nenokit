@@ -30,6 +30,10 @@ defmodule NenokitWeb.Endpoint do
     at: "/uploads/settings/files",
     from: "uploads/settings/files"
 
+  plug Plug.Static,
+    at: "/uploads/media/files",
+    from: "uploads/media/files"
+
   # Code reloading can be explicitly enabled under the
   # :code_reloader configuration of your endpoint.
   if code_reloading? do

@@ -26,7 +26,11 @@
       <% end%>
       <%= if has_permission(@conn, "manage_blogs") do %>
       <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="<%= Routes.admin_blog_path(@conn, :index) %>">
-        <i class="c-sidebar-nav-icon cil-paperclip"></i> Blogs</a></li>
+        <i class="c-sidebar-nav-icon cil-pencil"></i> Blogs</a></li>
+      <% end%>
+      <%= if has_permission(@conn, "manage_media") do %>
+      <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="<%= Routes.admin_media_path(@conn, :index) %>">
+        <i class="c-sidebar-nav-icon cil-paperclip"></i> Media</a></li>
       <% end%>
     <%end %>
     <%= if has_permission(@conn, "manage_surveys") do %>

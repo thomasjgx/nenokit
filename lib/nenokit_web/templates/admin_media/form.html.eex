@@ -1,0 +1,12 @@
+<%= form_for @changeset, @action, [multipart: true], fn f -> %>
+  <div class="form-group">
+    <label class="form-label">Name</label>
+    <%= text_input f, :name, class: "form-control" %>
+    <%= error_tag f, :name %>
+  </div>
+  <div class="form-group">
+    <%= file_input f, :file, class: "mt-2 mb-3" %>
+    <%= error_tag f, :file %>
+  </div>
+  <%= submit "Save changes", class: "btn btn-primary mb-2 mt-2" %>
+<% end %>

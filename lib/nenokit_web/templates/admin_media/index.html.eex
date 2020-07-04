@@ -1,0 +1,37 @@
+<div class="card">
+  <div class="card-header">Medias</div>
+  <div class="card-datatable table-response p-3">
+    <div class="row align-items-center mr-3">
+      <div class="col-sm-12">
+        <a class="btn btn-primary float-right mb-3" href="<%= Routes.admin_media_path(@conn, :new) %>">New Media</a>
+      </div>
+    </div>
+    <table class="datatables-simple table table-striped table bordered">
+      <thead>
+        <tr>
+          <th width="5%">#</th>
+          <th width="20%">Name</th>
+          <th>Media</th>
+          <th>Link</th>
+          <th>Created on</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+      <%= for media <- @medias do %>
+        <tr>
+          <td><%= media.id %></td>
+          <td><%= media.name %></td>
+          <td><img src="<%= get_file(media) %>" width="300"></td>
+          <td><%= "#{NenokitWeb.Endpoint.url}#{get_file(media)}" %></td>
+          <td><%= media.inserted_at %></td>
+          <td>
+            <%= link "Edit", to: Routes.admin_media_path(@conn, :edit, media), class: "btn btn-primary btn-sm mr-2"%>
+            <%= link "Delete", to: Routes.admin_media_path(@conn, :delete, media), method: :delete, class: "btn btn-danger btn-sm" %>
+          </td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

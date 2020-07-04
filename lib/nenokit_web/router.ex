@@ -41,6 +41,11 @@ defmodule NenokitWeb.Router do
     plug NenokitWeb.Plugs.EnsurePermission, "manage_blogs"
   end
 
+  # Manage media
+  pipeline :manage_media do
+    plug NenokitWeb.Plugs.EnsurePermission, "manage_media"
+  end
+
   # Manage surveys
   pipeline :manage_surveys do
     plug NenokitWeb.Plugs.EnsurePermission, "manage_surveys"
@@ -150,6 +155,14 @@ defmodule NenokitWeb.Router do
 
     # Blogs management
     resources "/", AdminBlogController
+  end
+
+  # Admin: Manage medias
+  scope "/admin/media", NenokitWeb do
+    pipe_through [:browser, :settings, :require_authenticated_user, :admin, :manage_media]
+
+    # Medias management
+    resources "/", AdminMediaController
   end
 
   # Admin: Manage surveys
