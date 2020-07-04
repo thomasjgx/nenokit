@@ -1,4 +1,4 @@
-<div class="c-sidebar c-sidebar-dark c-sidebar-fixed c-sidebar-lg-show" id="sidebar">
+<div class="c-sidebar c-sidebar-dark c-sidebar-fixed c-sidebar-lg-show bg-darker" id="sidebar">
   <div class="c-sidebar-brand d-lg-down-none" style="background: #FFFFFF;">
     <%= unless is_nil(assigns.settings.appearance.logo) do %>
         <img src="<%= get_logo(assigns.settings) %>" alt="Brand Logo" class="c-sidebar-brand-full" style="height: 46px;">
